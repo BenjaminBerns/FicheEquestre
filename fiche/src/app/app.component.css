@@ -1,0 +1,160 @@
+body{
+    padding: 0;
+    margin: 0;
+    font-family: "Playfair Display", serif;
+    font-optical-sizing: auto;
+    font-weight: 500;
+    font-style: normal;
+}
+
+nav{
+    font-family: "Playfair Display", serif;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: #d4af37;
+    width: 100%;
+    height: 10vh;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+a{
+    position:   relative;
+    font-size: 30px;
+    color: black;
+    list-style-type: none;
+    text-decoration: none;
+    transition: 0.5s ease-in-out;
+}
+
+a::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    background: black;
+    bottom: -5px;
+    left: 0;
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.4s ease-out;
+}
+
+a:hover::after {
+    transform: scaleX(1);
+}
+
+.navcontainer{
+    width: 47%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.logo{
+    position: relative;
+    height: 100px;
+    width: 100px;
+}
+
+.connexion{
+    right: 0;
+    position: absolute;
+    font-family: "Montserrat", serif;
+    font-size: 20px;
+    border-radius: 200px;
+    border: 1px solid black;
+    background-color: #EEBA2B;
+    margin: 16px;
+    padding: 16px;
+    transition: 0.5s ease-in-out;
+    cursor: pointer;
+}
+
+.connexion:hover{
+    color: white;
+    background-color: black;
+    transition: 0.5s ease-in-out;
+}
+
+.fond{
+    width: 100%;
+    height: 100%;
+    top: 10%;
+    left: 0;
+    margin: 0;
+    padding: 0;
+    position: fixed;
+    z-index: -2;
+}
+
+.filtre{
+    background-color: rgba(0, 0, 0, 0.521);
+    width: 100%;
+    height: 100%;
+    top: 10%;
+    left: 0;
+    margin: 0;
+    padding: 0;
+    position: fixed;
+    z-index: -1;
+}
+
+.container{
+    top: 0;
+    left: 0;
+    margin: 0;
+    padding: 0;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    z-index: -1;
+}
+
+.texte{
+    font-family: 'Lora', serif;
+    color: white;
+    font-size: 20px;
+}
+
+.EnSavoirPlus{
+    right: 0;
+    font-family: "Montserrat", serif;
+    font-size: 20px;
+    border-radius: 200px;
+    color: white;
+    border: 1px solid white;
+    background-color: #00000000;
+    padding: 16px;
+    transition: 0.5s ease-in-out;
+    cursor: pointer;
+}
+
+.EnSavoirPlus:hover{
+    color: black;
+    background-color: white;
+    transition: 0.5s ease-in-out;
+}
+
+footer{
+    position: fixed;
+    background-color: black;
+    width: 100%;
+    height: 10vh;
+    margin: 0;
+    padding: 0;
+    left: 0;
+    bottom: 0;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: "Playfair Display", serif;
+    font-size: 20px;
+}
