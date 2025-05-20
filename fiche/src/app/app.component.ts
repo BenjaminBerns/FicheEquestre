@@ -1,14 +1,13 @@
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
-import { QRCodeComponent } from './qrcode/qrcode.component';
+import {RouterLink, RouterModule, RouterOutlet} from '@angular/router';
+import {NgIf} from '@angular/common';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, QRCodeComponent],
+  imports: [RouterOutlet, RouterLink, NgIf, RouterModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
 export class AppComponent {
-  title = 'fiche';
-myAngularxQrCode: any;
+
 }

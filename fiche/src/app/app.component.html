@@ -1,21 +1,14 @@
-
 <nav>
   <div class="navcontainer">
-    <a href="" class="accueil">Accueil</a>
-    <a href="" class="fiche">Fiche</a>
-    <a href="" class="apropos">À propos</a>
+    <a routerLink="/" class="accueil">Accueil</a>
+    <a class="fiche">Fiche</a>
+    <a class="apropos">À propos</a>
   </div>
   <img src="logo.png" alt="" class="logo">
-  <button class="connexion">Se connecter</button>
+  <button routerLink="/connexion" class="connexion" >Se connecter</button>
 </nav>
-
 <img src="background.jpg" alt="" class="fond">
 <div class="filtre"></div>
-<div class="container">
-  <p class="texte">Premier site de création de fiches de notation équestre</p>
-  <button class="EnSavoirPlus">En savoir plus</button>
-</div>
-
-
-
 <footer>Fiches équestres</footer>
+
+<router-outlet/>
