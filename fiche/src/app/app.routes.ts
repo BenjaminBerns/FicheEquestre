@@ -6,6 +6,8 @@ import { HomeComponent } from './home/home.component';
 import { EpreuveComponent } from './epreuve/epreuve.component';
 import { DetailCompetitionComponent } from './detail-competition/detail-competition.component';
 import { FormComponent } from './competitions/form/form.component';
+import { QRComponent } from './qr/qr.component';
+import { PopUpComponent } from './pop-up/pop-up.component';
 
 export const routes: Routes = [
   {path: '', component: HomeComponent},
@@ -14,7 +16,10 @@ export const routes: Routes = [
   {path: 'competitions/:id/epreuves', component: EpreuvesComponent},
   {path: 'connexion', component: ConnexionComponent},
   { path: 'epreuve', component: EpreuveComponent },
+  { path: 'pop-up', component: PopUpComponent},
   { path: 'detail-competition', component: DetailCompetitionComponent },
   { path: 'competitions/ajouter', component: FormComponent },
   { path: 'competitions/:id/modifier', component: FormComponent },
+  { path: 'qr-code', component: QRComponent },
+  { path: 'formCompetitions', component: FormComponent}
 ];
