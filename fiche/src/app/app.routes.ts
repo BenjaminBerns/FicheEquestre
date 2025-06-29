@@ -7,7 +7,6 @@ import { EpreuveComponent } from './epreuve/epreuve.component';
 import { DetailCompetitionComponent } from './detail-competition/detail-competition.component';
 import { FormComponent } from './competitions/form/form.component';
 
-
 export const routes: Routes = [
   {path: '', component: HomeComponent},
   {path: 'connexion', component: ConnexionComponent},

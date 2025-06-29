@@ -5,6 +5,7 @@ import { CompetitionService, Competition } from '../../services/competition.serv
 
 @Component({
   selector: 'app-competition-list',
+  styleUrl: './list.component.css',
   templateUrl: './list.component.html',
   imports:[ CommonModule]
 })

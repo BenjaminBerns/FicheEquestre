@@ -4,7 +4,7 @@ import { RouterLink, RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-pop-up',
-  imports: [DetailCompetitionComponent, RouterOutlet, RouterLink],
+  imports: [RouterLink],
   templateUrl: './pop-up.component.html',
   styleUrl: './pop-up.component.css'
 })
