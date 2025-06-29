@@ -1,7 +1,7 @@
 <h2 *ngIf="isEdit">Modifier la compétition</h2>
 <h2 *ngIf="!isEdit">Ajouter une compétition</h2>
 
-<form [formGroup]="form" (ngSubmit)="onSubmit()">
+<form [formGroup]="form" (ngSubmit)="onSubmit()" class="formContainer">
   <label>Nom :</label>
   <input formControlName="nom" />
 
@@ -17,7 +17,7 @@
   <label>Lieu :</label>
   <input formControlName="location" />
 
-  <button type="submit" [disabled]="form.invalid">
+  <button class="button" type="submit" [disabled]="form.invalid">
     {{ isEdit ? 'Mettre à jour' : 'Créer' }}
   </button>
 </form>

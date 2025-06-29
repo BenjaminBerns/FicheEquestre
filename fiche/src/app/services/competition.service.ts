@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { of } from 'rxjs'; //que pour les fake données
+import cryptoRandomString from 'crypto-random-string';
 
 export interface Competition {
   id: number;
@@ -124,7 +125,7 @@ export class CompetitionService {
 
 
 
-  constructor() {}
+  constructor(private http: HttpClient) {}
 
   getCompetitions(): Observable<Competition[]> {
     return of(this.fakeCompetitions);
@@ -168,5 +169,33 @@ updateCompetition(id: number, data: Partial<Competition>): Observable<Competitio
     return of(this.fakeCompetitions[index]);
   }
   return of(undefined);
+  }
+  
+  createQrCode() {
+    return cryptoRandomString({length: 15, type: 'base64'});
+  }
+
+  IsCoonected: boolean = false;
+
+setConnect(isConnected: boolean): void {
+  this.IsCoonected = isConnected;
+  }
+  
+CreateQRcode(securite_jey_id: number, juge_id: number, competition_id: number): Observable<any> {
+  const url = 'http://prod-project-32/securite/CreateSecurite';
+  const body = {
+    securite_jey_id: securite_jey_id,
+    juge_id: juge_id,
+    competition_id: competition_id
+  };
+  return this.http.post(url, body);
+  }
+  
+QRcodeExist(token: string): Observable<any> {
+  const url = 'http://prod-project-32/qrcode/getCompetitionDataFromToken';
+  const body = {
+    token: token
+  };
+  return this.http.post(url, body);
 }
 }
