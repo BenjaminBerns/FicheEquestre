@@ -1,0 +1,23 @@
+<h2 *ngIf="isEdit">Modifier la compétition</h2>
+<h2 *ngIf="!isEdit">Ajouter une compétition</h2>
+
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+  <label>Nom :</label>
+  <input formControlName="nom" />
+
+  <label>Date :</label>
+  <input formControlName="date" type="date" />
+
+  <label>Statut :</label>
+  <select formControlName="statut">
+    <option>Ouverte</option>
+    <option>Clôturée</option>
+  </select>
+
+  <label>Lieu :</label>
+  <input formControlName="location" />
+
+  <button type="submit" [disabled]="form.invalid">
+    {{ isEdit ? 'Mettre à jour' : 'Créer' }}
+  </button>
+</form>
