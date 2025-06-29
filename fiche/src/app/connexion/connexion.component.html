@@ -1,10 +1,13 @@
 <h1 class="title">Connexion</h1>
 <div class="formContainer">
-  <form class="formulaire" action="">
+  <form class="formulaire" (ngSubmit)="Email()">
+
     <label class="labelid" for="id">Identifiant</label><br>
-    <input id="id" type="text" required><br>
+    <input id="id" type="text" name="email" [(ngModel)]="email" required><br>
+
     <label class="labelpw" for="pw">Mot de passe</label><br>
-    <input id="pw" type="password" required><br>
+    <input id="pw" type="password" name="password" [(ngModel)]="password" required><br>
+
     <button type="submit">Connexion</button>
   </form>
 </div>
