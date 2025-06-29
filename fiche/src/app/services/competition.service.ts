@@ -136,4 +136,37 @@ export class CompetitionService {
     const epreuves = this.fakeEpreuves.filter(e => e.competition_id === competitionId);
     return of(epreuves);
   }
+
+  private idCounter = 4; // Pour simuler les ID auto-incrémentés
+
+addCompetition(data: Partial<Competition>): Observable<Competition> {
+  const newCompetition: Competition = {
+    id: this.idCounter++,
+    nom: data.nom!,
+    date: data.date!,
+    statut: data.statut!,
+    location: data.location!,
+    createdBy: 999, // temporaire
+    createdAt: new Date().toISOString()
+  };
+  this.fakeCompetitions.push(newCompetition);
+  return of(newCompetition);
+}
+
+getCompetitionById(id: number): Observable<Competition | undefined> {
+  const found = this.fakeCompetitions.find(c => c.id === id);
+  return of(found);
+}
+
+updateCompetition(id: number, data: Partial<Competition>): Observable<Competition | undefined> {
+  const index = this.fakeCompetitions.findIndex(c => c.id === id);
+  if (index !== -1) {
+    this.fakeCompetitions[index] = {
+      ...this.fakeCompetitions[index],
+      ...data
+    };
+    return of(this.fakeCompetitions[index]);
+  }
+  return of(undefined);
+}
 }
