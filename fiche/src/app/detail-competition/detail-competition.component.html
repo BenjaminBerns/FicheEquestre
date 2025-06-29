@@ -1,0 +1,20 @@
+<h1 class="title">Détails de la compétition</h1>
+<div class="formContainer">
+    <form class="formulaire" action="">
+        <label class="labelid" for="id">Nom</label><br>
+        <input id="id" type="text" required><br>
+        <label class="labelpw" for="pw">Date</label><br>
+        <input id="pw" type="date" required><br>
+        <label class="labelpw" for="pw">Status</label><br>
+        <select id="status" required>
+            <option value="" disabled selected>Sélectionnez le statut</option>
+            <option value="en_attente">En attente</option>
+            <option value="en_cours">En cours</option>
+            <option value="termine">Terminé</option>
+        </select><br>
+        <div class="btn">
+            <button type="submit" class="submit">Enregistrer</button>
+            <button type="submit" class="delete">Supprimer</button>
+        </div>
+    </form>
+</div>

@@ -1,0 +1,55 @@
+<div class="container">
+    <table>
+        <thead>
+            <tr>
+                <th class="border-radius-left">Nom</th>
+                <th>Description</th>
+                <th>Matériel</th>
+                <th class="border-radius-right">Détail</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Saut d'obstacle</td>
+                <td>Le cheval et son cavalier doivent franchir un parcours d'obstacles sans faute et dans un temps
+                    imparti.</td>
+                <td>Matériel</td>
+                <td>
+                    <button class="detail-link" (click)="openPopUp()">En savoir plus</button>
+                    <img class="icon" src="delete.png" alt="">
+                </td>
+            </tr>
+            <tr>
+                <td>Dressage</td>
+                <td>Le couple cheval-cavalier réalise une série de figures précises pour montrer la souplesse,
+                    l'obéissance et l'élégance du cheval.</td>
+                <td>Matériel</td>
+                <td>
+                    <button class="detail-link">En savoir plus</button>
+                    <img class="icon" src="delete.png" alt="">
+                </td>
+            </tr>
+            <tr>
+                <td>Concours complet</td>
+                <td>Une combinaison de dressage, de saut d'obstacles et de cross (épreuve de fond avec des obstacles
+                    naturels).</td>
+                <td>Matériel</td>
+                <td>
+                    <button class="detail-link">En savoir plus</button>
+                    <img class="icon" src="delete.png" alt="">
+                </td>
+            </tr>
+            <tr class="border-radius-bottom">
+                <td>Endurance</td>
+                <td>Une course sur de très longues distances où le cheval est régulièrement contrôlé par des
+                    vétérinaires.</td>
+                <td>Matériel</td>
+                <td>
+                    <button class="detail-link">En savoir plus</button>
+                    <img class="icon" src="delete.png" alt="">
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>  
+<app-pop-up *ngIf="isPopUpOpen"></app-pop-up>
