@@ -44,17 +44,17 @@ export class FormComponent implements OnInit {
   }
 
   onSubmit(): void {
-    if (this.form.invalid) return;
+  //   if (this.form.invalid) return;
 
-    const values = this.form.value;
-    if (this.isEdit && this.competitionId) {
-      this.service.updateCompetition(this.competitionId, values).subscribe(() => {
-        this.router.navigate(['/']);
-      });
-    } else {
-      this.service.addCompetition(values).subscribe(() => {
-        this.router.navigate(['/']);
-      });
-    }
+  //   const values = this.form.value;
+  //   if (this.isEdit && this.competitionId) {
+  //     this.service.updateCompetition(this.competitionId, values).subscribe(() => {
+  //       this.router.navigate(['/']);
+  //     });
+  //   } else {
+  //     this.service.addCompetition(values).subscribe(() => {
+  //       this.router.navigate(['/']);
+  //     });
+  //   }
   }
 }

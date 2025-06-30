@@ -13,18 +13,19 @@
     </thead>
     <tbody>
       <tr *ngFor="let comp of competitions">
-        <td>{{ comp.nom }}</td>
-        <td>{{ comp.date }}</td>  <!--| date: 'dd/MM/yyyy' -->
-        <td>{{ comp.statut }}</td>
+        <td>{{ comp.competition_nom }}</td>
+        <td>{{ comp.competition_date ? (comp.competition_date | date: 'dd/MM/yyyy') : 'Non défini' }}</td>
+        <td>{{ comp.competition_statut }}</td>
         <td>
           <button (click)="voirDetails(comp)" class="detail-link">Voir</button>
         </td>
         <td>
-          <button (click)="supprimerCompetition(comp.id)"><img class="icon" src="delete.png" alt=""></button>
+          <button style="border-radius: 100px;" (click)="supprimerCompetition(comp.competition_id)"><img class="icon" src="delete.png" alt=""></button>
         </td>
       </tr>
     </tbody>
   </table>
+<button class="btnadd" routerLink="formCompetitions">Ajouter une compétition</button>
 </div>
 <ng-template #noData>
   <p>Aucune compétition disponible.</p>

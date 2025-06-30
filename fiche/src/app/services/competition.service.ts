@@ -5,14 +5,15 @@ import { of } from 'rxjs'; //que pour les fake données
 import cryptoRandomString from 'crypto-random-string';
 
 export interface Competition {
-  id: number;
-  nom: string;
-  date: string;
-  statut: string;
-  location: string;
-  createdBy: number;
-  createdAt: string;
+  competition_id: number;
+  competition_nom: string;
+  competition_date: string | null;
+  competition_location: string;
+  competition_statut: number;
+  created_at: string | null;
+  created_by: number | null;
 }
+
 
 export interface Epreuve {
   epreuve_id: number;
@@ -36,44 +37,44 @@ export class CompetitionService {
     return this.http.get<Competition[]>(this.apiUrl);
   }*/
 
-  private fakeCompetitions: Competition[] = [
-    {
-      id: 1,
-      nom: 'Compétition de Villefranche',
-      date: '2025-05-16',
-      statut: 'En attente',
-      location: 'Villefranche-sur-Saône',
-      createdBy: 101,
-      createdAt: '2025-04-20T10:30:00Z'
-    },
-    {
-      id: 2,
-      nom: 'Compétiton des monts lyonnais',
-      date: '2025-04-28',
-      statut: 'En cours',
-      location: 'Lyon',
-      createdBy: 102,
-      createdAt: '2025-04-21T14:15:00Z'
-    },
-    {
-      id: 3,
-      nom: 'Compétition de Saint Priest',
-      date: '2025-02-12',
-      statut: 'Terminée',
-      location: 'Saint-Priest',
-      createdBy: 103,
-      createdAt: '2025-01-25T08:00:00Z'
-    },
-    {
-      id: 4,
-      nom: 'Compétition de Marcy-l’Étoile',
-      date: '2025-01-04',
-      statut: 'Terminée',
-      location: 'Marcy-l’Étoile',
-      createdBy: 101,
-      createdAt: '2025-01-01T08:00:00Z'
-    }
-  ];
+  // private fakeCompetitions: Competition[] = [
+  //   {
+  //     competition_id: 1,
+  //     competition_nom: 'Compétition de Villefranche',
+  //     competition_date: '2025-05-16',
+  //     statut: 'En attente',
+  //     location: 'Villefranche-sur-Saône',
+  //     createdBy: 101,
+  //     createdAt: '2025-04-20T10:30:00Z'
+  //   },
+  //   {
+  //     competition_id: 2,
+  //     competition_nom: 'Compétiton des monts lyonnais',
+  //     competition_date: '2025-04-28',
+  //     statut: 'En cours',
+  //     location: 'Lyon',
+  //     createdBy: 102,
+  //     createdAt: '2025-04-21T14:15:00Z'
+  //   },
+  //   {
+  //     competition_id: 3,
+  //     competition_nom: 'Compétition de Saint Priest',
+  //     competition_date: '2025-02-12',
+  //     statut: 'Terminée',
+  //     location: 'Saint-Priest',
+  //     createdBy: 103,
+  //     createdAt: '2025-01-25T08:00:00Z'
+  //   },
+  //   {
+  //     competition_id: 4,
+  //     competition_nom: 'Compétition de Marcy-l’Étoile',
+  //     competition_date: '2025-01-04',
+  //     statut: 'Terminée',
+  //     location: 'Marcy-l’Étoile',
+  //     createdBy: 101,
+  //     createdAt: '2025-01-01T08:00:00Z'
+  //   }
+  // ];
 
   private fakeEpreuves: Epreuve[] = [
     {
@@ -123,79 +124,91 @@ export class CompetitionService {
     }
   ];
 
+  constructor(private http: HttpClient) { }
 
+  // getCompetitions(): Observable<Competition[]> {
+  //   return of(this.fakeCompetitions);
+  // }
 
-  constructor(private http: HttpClient) {}
+  getAllCompetitions(): Observable<any> {
+    const url = 'http://prod-project-32/competition/getAllCompetitions';
+    return this.http.get(url);
+  }
 
-  getCompetitions(): Observable<Competition[]> {
-    return of(this.fakeCompetitions);
-    }
-
-    
-
-    getEpreuvesByCompetitionId(competitionId: number): Observable<Epreuve[]> {
+  getEpreuvesByCompetitionId(competitionId: number): Observable<Epreuve[]> {
     const epreuves = this.fakeEpreuves.filter(e => e.competition_id === competitionId);
     return of(epreuves);
   }
 
   private idCounter = 4; // Pour simuler les ID auto-incrémentés
 
-addCompetition(data: Partial<Competition>): Observable<Competition> {
-  const newCompetition: Competition = {
-    id: this.idCounter++,
-    nom: data.nom!,
-    date: data.date!,
-    statut: data.statut!,
-    location: data.location!,
-    createdBy: 999, // temporaire
-    createdAt: new Date().toISOString()
-  };
-  this.fakeCompetitions.push(newCompetition);
-  return of(newCompetition);
-}
+  // addCompetition(data: Partial<Competition>): Observable<Competition> {
+  //   const newCompetition: Competition = {
+  //     competition_id: this.idCounter++,
+  //     competition_nom: data.competition_nom!,
+  //     competition_date: data.competition_date!,
+  //     competition_statut: data.competition_statut!,
+  //     competition_location: data.competition_location!,
+  //     created_by: 999, // temporaire
+  //     created_at: new Date().toISOString()
+  //   };
+  //   this.fakeCompetitions.push(newCompetition);
+  //   return of(newCompetition);
+  // }
 
-getCompetitionById(id: number): Observable<Competition | undefined> {
-  const found = this.fakeCompetitions.find(c => c.id === id);
-  return of(found);
-}
+  // getCompetitionById(id: number): Observable<Competition | undefined> {
+  //   const found = this.fakeCompetitions.find(c => c.id === id);
+  //   return of(found);
+  // }
 
-updateCompetition(id: number, data: Partial<Competition>): Observable<Competition | undefined> {
-  const index = this.fakeCompetitions.findIndex(c => c.id === id);
-  if (index !== -1) {
-    this.fakeCompetitions[index] = {
-      ...this.fakeCompetitions[index],
-      ...data
-    };
-    return of(this.fakeCompetitions[index]);
+  getCompetitionById(id: number): Observable<any> {
+    const url = 'http://prod-project-32/qrcode/getCompetitionDataFromToken';
+    const params = { id: id };
+    return this.http.get(url, { params });
   }
-  return of(undefined);
-  }
+
+  // updateCompetition(id: number, data: Partial<Competition>): Observable<Competition | undefined> {
+  //   const index = this.fakeCompetitions.findIndex(c => c.id === id);
+  //   if (index !== -1) {
+  //     this.fakeCompetitions[index] = {
+  //       ...this.fakeCompetitions[index],
+  //       ...data
+  //     };
+  //     return of(this.fakeCompetitions[index]);
+  //   }
+  //   return of(undefined);
+  // }
+
+  // DeleteCompetition(id: number) Observable<any> {
+  //   const url = 'http://prod-project-32/competition/Delete';
+  //   const params = { id: id };
+  //   return this.http.get(url, { params });
+  // }
+
   
   createQrCode() {
-    return cryptoRandomString({length: 15, type: 'base64'});
+    return cryptoRandomString({ length: 15, type: 'base64' });
   }
 
   IsCoonected: boolean = false;
 
-setConnect(isConnected: boolean): void {
-  this.IsCoonected = isConnected;
+  setConnect(isConnected: boolean): void {
+    this.IsCoonected = isConnected;
   }
   
-CreateQRcode(securite_jey_id: number, juge_id: number, competition_id: number): Observable<any> {
-  const url = 'http://prod-project-32/securite/CreateSecurite';
-  const body = {
-    securite_jey_id: securite_jey_id,
-    juge_id: juge_id,
-    competition_id: competition_id
-  };
-  return this.http.post(url, body);
+  CreateQRcodeAPI(securite_jey_id: string, juge_id: number, competition_id: number): Observable<any> {
+    const url = 'http://prod-project-32/securite/CreateSecurite';
+    const body = {
+      securite_jey_id: securite_jey_id,
+      juge_id: juge_id,
+      competition_id: competition_id
+    };
+    return this.http.post(url, body);
   }
   
-QRcodeExist(token: string): Observable<any> {
-  const url = 'http://prod-project-32/qrcode/getCompetitionDataFromToken';
-  const body = {
-    token: token
-  };
-  return this.http.post(url, body);
-}
+  QRcodeExist(token: string): Observable<any> {
+    const url = 'http://prod-project-32/qrcode/getCompetitionDataFromToken';
+    const params = { token: token };
+    return this.http.get(url, { params });
+  }
 }

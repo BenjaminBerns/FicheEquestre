@@ -8,18 +8,20 @@ import { DetailCompetitionComponent } from './detail-competition/detail-competit
 import { FormComponent } from './competitions/form/form.component';
 import { QRComponent } from './qr/qr.component';
 import { PopUpComponent } from './pop-up/pop-up.component';
+import { config } from 'rxjs';
 
 export const routes: Routes = [
-  {path: '', component: HomeComponent},
-  {path: 'connexion', component: ConnexionComponent},
-  {path: 'listecompetitions', component: ListComponent},
-  {path: 'competitions/:id/epreuves', component: EpreuvesComponent},
-  {path: 'connexion', component: ConnexionComponent},
+  { path: '', component: HomeComponent},
+  { path: 'connexion', component: ConnexionComponent},
+  { path: 'listecompetitions', component: ListComponent},
+  { path: 'competitions/:id/epreuves', component: EpreuvesComponent},
+  { path: 'connexion', component: ConnexionComponent},
   { path: 'epreuve', component: EpreuveComponent },
-  { path: 'pop-up', component: PopUpComponent},
+  { path: 'pop-up/:id', component: PopUpComponent},
   { path: 'detail-competition', component: DetailCompetitionComponent },
   { path: 'competitions/ajouter', component: FormComponent },
   { path: 'competitions/:id/modifier', component: FormComponent },
   { path: 'qr-code', component: QRComponent },
-  { path: 'formCompetitions', component: FormComponent}
+  { path: 'formCompetitions', component: FormComponent }
+  { path: 'Configuration', component: ConfigurationComponent}
 ];
