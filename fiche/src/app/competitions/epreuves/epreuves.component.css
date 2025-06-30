@@ -55,8 +55,6 @@ tr:hover {
 }
 
 .container {
-    overflow-x: auto;
-    /* Défilement horizontal si nécessaire */
     white-space: nowrap;
     /* Empêche le retour à la ligne */
     display: flex;
