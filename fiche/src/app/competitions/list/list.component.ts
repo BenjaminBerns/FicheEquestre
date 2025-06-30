@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { CompetitionService, Competition } from '../../services/competition.service';
 
@@ -7,21 +7,23 @@ import { CompetitionService, Competition } from '../../services/competition.serv
   selector: 'app-competition-list',
   styleUrl: './list.component.css',
   templateUrl: './list.component.html',
-  imports:[ CommonModule]
+  imports:[ CommonModule, RouterLink]
 })
 export class ListComponent implements OnInit {
+  
   competitions: Competition[] = [];
 
   constructor(private competitionService: CompetitionService, private router: Router) {}
 
   ngOnInit(): void {
-    this.competitionService.getCompetitions().subscribe(data => {
+    this.competitionService.getAllCompetitions().subscribe(data => {
       this.competitions = data;
+      console.log(data);
     });
   }
 
   voirDetails(comp: Competition): void {
-  this.router.navigate(['/competitions', comp.id, 'epreuves']);
+  this.router.navigate(['/competitions', comp.competition_id, 'epreuves']);
   }
 
   supprimerCompetition(id: number): void {

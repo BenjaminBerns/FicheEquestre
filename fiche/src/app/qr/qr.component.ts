@@ -20,7 +20,7 @@ export class QRComponent {
 
   ngOnInit() {
     this.qrcode = this.competitionService.createQrCode();
-    this.competitionService.QRcodeExist(this.qrcode).subscribe({
+    this.competitionService.QRcodeExist('ExempleEEEuuuuu').subscribe({
       next: (response) => {
         console.log('Réponse :', response);
         this.req = response;
@@ -29,6 +29,17 @@ export class QRComponent {
         console.error('Erreur API', err);
       }
     });
+    if (this.req == null) {
+      this.competitionService.CreateQRcodeAPI(this.qrcode, 3, 100).subscribe({
+      next: (response) => {
+        console.log('Réponse :', response);
+        this.req = response;
+      },
+      error: (err) => {
+        console.error('Erreur API', err);
+      }
+    });
+    }
   }
   //       next: (response) => {
   //         console.log('Réponse de l\'API :', response);

@@ -8,7 +8,9 @@
         <th>Description</th>
         <th>Matériels</th>
         <th>Juge ID</th>
-        <th class="border-radius-right">Notation</th>
+        <th>Notation</th>
+        <th>Détails</th>
+        <th class="border-radius-right">Supprimer</th>
       </tr>
     </thead>
     <tbody>
@@ -18,6 +20,13 @@
         <td>{{ ep.epreuve_materiels }}</td>
         <td>{{ ep.juge_id }}</td>
         <td>{{ ep.notation_type }}</td>
+        <td>
+          <button (click)="DetailsPopUp(ep.epreuve_id)" class="detail-link">Voir</button>
+        </td>
+        <td>
+          <button style="border-radius: 100px;" (click)="supprimerEpreuve(ep.epreuve_id)"><img class="icon"
+              src="delete.png" alt=""></button>
+        </td>
       </tr>
     </tbody>
   </table>
