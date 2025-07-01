@@ -2,10 +2,11 @@ import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { EpreuvesService } from '../services/epreuves.service';
 import { CompetitionService } from '../services/competition.service';
+import { FormsModule, NgModel } from '@angular/forms';
 
 @Component({
   selector: 'app-detail-competition',
-  imports: [],
+  imports: [FormsModule],
   templateUrl: './detail-competition.component.html',
   styleUrl: './detail-competition.component.css'
 })
@@ -71,9 +72,14 @@ export class DetailCompetitionComponent {
     }
   }
 
-  updateCompetition() {
-    this.CompetitionService.UpdateCompetition(this.updatedData).subscribe(data => {
+  async updateCompetition() {
+    this.updatedData.competition_nom = this.competition_nom;
+    this.updatedData.competition_date = this.competition_date;
+    this.updatedData.competition_statut = this.competition_statut;
+    this.CompetitionService.UpdateCompetition(Number(this.id), this.updatedData).subscribe(data => {
       console.log(data);
     });
+    await new Promise(resolve => setTimeout(resolve, 1000));//pause de 1 seconde pour laisser le temps d'effectuer la requete avant de récupérer la liste des compétitions
+    this.router.navigate(['/listecompetitions']);
   }
 }

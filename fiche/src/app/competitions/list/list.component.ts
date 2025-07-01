@@ -26,6 +26,10 @@ export class ListComponent implements OnInit {
   this.router.navigate(['/competitions', comp.competition_id, 'epreuves']);
   }
 
+  DetailsPopUp(epreuve_id: number) {
+    this.router.navigate(['/pop-up', epreuve_id]);
+  }
+
   supprimerCompetition(id: number): void {
     console.log('Suppression de la compétition avec ID :', id);
     // plus tard : confirmation + appel à l'API

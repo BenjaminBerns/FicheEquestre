@@ -8,6 +8,7 @@
         <th>Date</th>
         <th>Statut</th>
         <th>Détails</th>
+        <th>Epreuves</th>
         <th class="border-radius-right">Supprimer</th>
       </tr>
     </thead>
@@ -17,10 +18,13 @@
         <td>{{ comp.competition_date ? (comp.competition_date | date: 'dd/MM/yyyy') : 'Non défini' }}</td>
         <td>{{ comp.competition_statut }}</td>
         <td>
+          <button (click)="DetailsPopUp(comp.competition_id)" class="detail-link">Consulter</button>
+        </td>
+        <td>
           <button (click)="voirDetails(comp)" class="detail-link">Voir</button>
         </td>
         <td>
-          <button style="border-radius: 100px;" (click)="supprimerCompetition(comp.competition_id)"><img class="icon" src="delete.png" alt=""></button>
+          <img class="icon" src="delete.png" alt="" (click)="supprimerCompetition(comp.competition_id)">
         </td>
       </tr>
     </tbody>

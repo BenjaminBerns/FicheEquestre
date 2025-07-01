@@ -177,10 +177,17 @@ export class CompetitionService {
     return this.http.get(url, { params });
   }
 
-  UpdateCompetition(updatedData: Competition): Observable<any> {
+  UpdateCompetition(id: number, updatedData: Competition): Observable<any> {
+    console.log("updatedData : -->", updatedData);
+    // Ajout du paramètre id dans le corps envoyé à l'API
+    const body = {
+      id: id,
+      competition_nom: updatedData.competition_nom,
+      competition_date: updatedData.competition_date,
+      competition_statut: updatedData.competition_statut
+    };
     const url = 'http://prod-project-32/api/competition/updateCompetition';
-    const params = { updatedData: updatedData };
-    return this.http.post(url, { params });
+    return this.http.put(url, body);
   }
 
   // updateCompetition(id: number, data: Partial<Competition>): Observable<Competition | undefined> {
