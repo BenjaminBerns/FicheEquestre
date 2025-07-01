@@ -130,8 +130,12 @@ export class CompetitionService {
   //   return of(this.fakeCompetitions);
   // }
 
+  GetStatusNotif() {
+    
+  }
+
   getAllCompetitions(): Observable<any> {
-    const url = 'http://prod-project-32/competition/getAllCompetitions';
+    const url = 'http://prod-project-32/api/competition/getAllCompetitions';
     return this.http.get(url);
   }
 
@@ -161,10 +165,22 @@ export class CompetitionService {
   //   return of(found);
   // }
 
-  getCompetitionById(id: number): Observable<any> {
-    const url = 'http://prod-project-32/qrcode/getCompetitionDataFromToken';
+  getCompetitionByToken(id: number): Observable<any> {
+    const url = 'http://prod-project-32/api/qrcode/getCompetitionDataFromToken';
     const params = { id: id };
     return this.http.get(url, { params });
+  }
+
+  getCompetitionById(id: number): Observable<any> {
+    const url = 'http://prod-project-32/api/competition/getSpecificCompetition';
+    const params = { id: id };
+    return this.http.get(url, { params });
+  }
+
+  UpdateCompetition(updatedData: Competition): Observable<any> {
+    const url = 'http://prod-project-32/api/competition/updateCompetition';
+    const params = { updatedData: updatedData };
+    return this.http.post(url, { params });
   }
 
   // updateCompetition(id: number, data: Partial<Competition>): Observable<Competition | undefined> {
@@ -180,7 +196,7 @@ export class CompetitionService {
   // }
 
   // DeleteCompetition(id: number) Observable<any> {
-  //   const url = 'http://prod-project-32/competition/Delete';
+  //   const url = 'http://prod-project-32/api/competition/Delete';
   //   const params = { id: id };
   //   return this.http.get(url, { params });
   // }
@@ -197,7 +213,7 @@ export class CompetitionService {
   }
   
   CreateQRcodeAPI(securite_jey_id: string, juge_id: number, competition_id: number): Observable<any> {
-    const url = 'http://prod-project-32/securite/CreateSecurite';
+    const url = 'http://prod-project-32/api/securite/CreateSecurite';
     const body = {
       securite_jey_id: securite_jey_id,
       juge_id: juge_id,
@@ -207,7 +223,7 @@ export class CompetitionService {
   }
   
   QRcodeExist(token: string): Observable<any> {
-    const url = 'http://prod-project-32/qrcode/getCompetitionDataFromToken';
+    const url = 'http://prod-project-32/api/qrcode/getCompetitionDataFromToken';
     const params = { token: token };
     return this.http.get(url, { params });
   }

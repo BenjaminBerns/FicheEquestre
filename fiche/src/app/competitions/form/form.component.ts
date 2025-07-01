@@ -35,7 +35,7 @@ export class FormComponent implements OnInit {
 
     if (this.isEdit && id) {
       this.competitionId = +id;
-      this.service.getCompetitionById(this.competitionId).subscribe(data => {
+      this.service.getCompetitionByToken(this.competitionId).subscribe(data => {
         if (data) {
           this.form.patchValue(data);
         }

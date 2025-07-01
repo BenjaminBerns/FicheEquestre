@@ -30,7 +30,7 @@ export class ConnexionComponent {
   constructor(private http: HttpClient, private competitionService: CompetitionService, private router: Router) {}
 
   Email() {
-    this.http.post<{ status: boolean, user: any }>('http://prod-project-32/auth/isEmailExist', {
+    this.http.post<{ status: boolean, user: any }>('http://prod-project-32/api/auth/isEmailExist', {
       email: this.email
     })
       .subscribe({
