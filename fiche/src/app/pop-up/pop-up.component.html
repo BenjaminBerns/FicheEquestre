@@ -4,7 +4,7 @@
             <h1>Redirection !</h1>
         <p>Souhaitez vous séléctionner le détails des compétitions ou des juges affecter à la compétition ?</p>
         <div class="btn-container">
-            <button routerLink="/detail-competition">Compétitions</button>
+            <button [routerLink]="['/detail-competition', id]">Compétitions</button>
             <button>Juges</button>
         </div>
     </div>
