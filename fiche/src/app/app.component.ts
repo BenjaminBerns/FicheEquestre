@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { RouterLink, RouterModule, RouterOutlet } from '@angular/router';
 import { NgIf } from '@angular/common';
 import { CompetitionService } from './services/competition.service';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-root',

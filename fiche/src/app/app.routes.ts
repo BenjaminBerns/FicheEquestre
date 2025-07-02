@@ -10,6 +10,9 @@ import { PopUpComponent } from './pop-up/pop-up.component';
 import { ConfigurationComponent } from './configuration/configuration.component';
 import { JugeComponent } from './juge/juge.component';
 import { DetailEpreuveComponent } from './detail-epreuve/detail-epreuve.component';
+import { config } from 'rxjs';
+import { JugesComponent } from './juges/juges.component';
+import { CavaliersComponent } from './cavaliers/cavaliers.component';
 
 export const routes: Routes = [
   //----------------------Accueil + Connexion--------------------//
@@ -36,9 +39,16 @@ export const routes: Routes = [
   { path: 'competitions/:id/epreuves', component: EpreuvesComponent },
   
   //----------------------Compétitions--------------------//
+  { path: 'listecompetitions', component: ListComponent},
+  { path: 'competitions/:id/epreuves', component: EpreuvesComponent},
+  { path: 'connexion', component: ConnexionComponent},
+  { path: 'pop-up/:id', component: PopUpComponent},
   { path: 'detail-competition/:id', component: DetailCompetitionComponent },
   { path: 'listecompetitions', component: ListComponent},
   { path: 'formCompetitions', component: FormComponent },
   { path: 'competitions/ajouter', component: FormComponent },
   { path: 'competitions/:id/modifier', component: FormComponent }
+  { path: 'juges', component: JugesComponent },
+  { path: 'epreuves', component: EpreuvesComponent },
+  { path: 'cavaliers', component: CavaliersComponent },
 ];

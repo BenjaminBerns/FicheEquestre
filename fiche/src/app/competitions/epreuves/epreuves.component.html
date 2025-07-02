@@ -1,4 +1,19 @@
 
+<!-- Formulaire d'ajout / modification -->
+<div style="margin: 30px 0;">
+  <form (ngSubmit)="isEditing ? updateEpreuve() : addEpreuve()">
+    <input [(ngModel)]="selectedEpreuve.epreuve_name" name="name" placeholder="Nom de l'épreuve" required />
+    <input [(ngModel)]="selectedEpreuve.epreuve_description" name="desc" placeholder="Description" required />
+    <input [(ngModel)]="selectedEpreuve.epreuve_materiels" name="materiel" placeholder="Matériels" required />
+    <input [(ngModel)]="selectedEpreuve.juge_id" name="juge" type="number" placeholder="ID du juge" required />
+    <input [(ngModel)]="selectedEpreuve.notation_type" name="notation" type="number" placeholder="Type de notation" required />
+
+    <button type="submit">{{ isEditing ? 'Mettre à jour' : 'Ajouter' }}</button>
+    <button type="button" (click)="cancelEdit()">Annuler</button>
+  </form>
+</div>
+
+<!-- Tableau des épreuves -->
 <div class="container">
   <h1>Épreuves de la compétition n°{{ competitionId }}</h1>
   <table *ngIf="epreuves.length > 0; else noEpreuves" class="table">
@@ -9,8 +24,8 @@
         <th>Matériels</th>
         <th>Juge ID</th>
         <th>Notation</th>
-        <th>Détails</th>
-        <th class="border-radius-right">Supprimer</th>
+        <th>Détail</th>
+        <th class="border-radius-right">Actions</th>
       </tr>
     </thead>
     <tbody>
@@ -22,15 +37,27 @@
         <td>{{ ep.notation_type }}</td>
         <td>
           <button (click)="DetailsPopUp(ep.epreuve_id, ep.juge_id)" class="detail-link">Voir</button>
+          <button class="detail-link" (click)="getEpreuveDetails(ep.epreuve_id)">Voir</button>
         </td>
         <td>
-          <button style="border-radius: 100px;" (click)="supprimerEpreuve(ep.epreuve_id)"><img class="icon"
-              src="delete.png" alt=""></button>
+          <button (click)="editEpreuve(ep)">✏️</button>
+          <button (click)="deleteEpreuve(ep.epreuve_id)">🗑️</button>
         </td>
       </tr>
     </tbody>
   </table>
 </div>
+
 <ng-template #noEpreuves>
   <p>Aucune épreuve pour cette compétition.</p>
 </ng-template>
+
+<!-- Détail sélectionné -->
+<div *ngIf="epreuveDetail">
+  <h3>Détail de l'épreuve sélectionnée :</h3>
+  <p><strong>Nom :</strong> {{ epreuveDetail.epreuve_name }}</p>
+  <p><strong>Description :</strong> {{ epreuveDetail.epreuve_description }}</p>
+  <p><strong>Matériels :</strong> {{ epreuveDetail.epreuve_materiels }}</p>
+  <p><strong>Juge ID :</strong> {{ epreuveDetail.juge_id }}</p>
+  <p><strong>Notation :</strong> {{ epreuveDetail.notation_type }}</p>
+</div>
