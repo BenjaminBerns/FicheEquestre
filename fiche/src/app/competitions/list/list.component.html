@@ -1,6 +1,4 @@
-<h2>Liste des compétitions</h2>
-
-<div class="container">
+<div class="container"><h1>Liste des Compétitions</h1>
   <table *ngIf="competitions.length > 0; else noData" class="table">
     <thead>
       <tr>
@@ -8,6 +6,7 @@
         <th>Date</th>
         <th>Statut</th>
         <th>Détails</th>
+        <th>Epreuves</th>
         <th class="border-radius-right">Supprimer</th>
       </tr>
     </thead>
@@ -15,12 +14,22 @@
       <tr *ngFor="let comp of competitions">
         <td>{{ comp.competition_nom }}</td>
         <td>{{ comp.competition_date ? (comp.competition_date | date: 'dd/MM/yyyy') : 'Non défini' }}</td>
-        <td>{{ comp.competition_statut }}</td>
+        <td>
+          <ng-container [ngSwitch]="comp.competition_statut">
+            <span *ngSwitchCase="1">En attente</span>
+            <span *ngSwitchCase="2">En cours</span>
+            <span *ngSwitchCase="3">Terminée</span>
+            <span *ngSwitchDefault>Inconnu</span>
+          </ng-container>
+        </td>
+        <td>
+          <button (click)="DetailsPopUp(comp.competition_id)" class="detail-link">Consulter</button>
+        </td>
         <td>
           <button (click)="voirDetails(comp)" class="detail-link">Voir</button>
         </td>
         <td>
-          <button style="border-radius: 100px;" (click)="supprimerCompetition(comp.competition_id)"><img class="icon" src="delete.png" alt=""></button>
+          <img class="icon" src="delete.png" alt="" (click)="supprimerCompetition(comp.competition_id)">
         </td>
       </tr>
     </tbody>

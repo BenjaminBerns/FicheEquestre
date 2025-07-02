@@ -116,3 +116,9 @@ tr:hover {
     transition: 0.5s ease-in-out;
     cursor: pointer;
 }
+
+.btnadd:hover {
+    color: white;
+    background-color: black;
+    transition: 0.5s ease-in-out;
+}

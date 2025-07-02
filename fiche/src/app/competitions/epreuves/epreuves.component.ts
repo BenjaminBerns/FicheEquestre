@@ -12,6 +12,8 @@ import { FormsModule } from '@angular/forms';
 })
 export class EpreuvesComponent implements OnInit {
   competitionId: number = 0;
+  id_juge: string | null = null;
+  
   epreuves: Epreuve[] = [];
   selectedEpreuve: Partial<Epreuve> = {};
   epreuveDetail: Epreuve | null = null;
@@ -53,6 +55,8 @@ export class EpreuvesComponent implements OnInit {
     });
   }
 
+  DetailsPopUp(epreuve_id: number, juge_id: number) {
+    this.router.navigate(['/pop-up/epreuve', epreuve_id, 'juge', juge_id]);
   editEpreuve(epreuve: Epreuve): void {
     this.selectedEpreuve = { ...epreuve };
     this.isEditing = true;

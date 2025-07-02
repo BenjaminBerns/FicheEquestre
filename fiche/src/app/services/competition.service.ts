@@ -177,10 +177,17 @@ export class CompetitionService {
     return this.http.get(url, { params });
   }
 
-  UpdateCompetition(updatedData: Competition): Observable<any> {
+  UpdateCompetition(id: number, updatedData: Competition): Observable<any> {
+    console.log("updatedData : -->", updatedData);
+    // Ajout du paramètre id dans le corps envoyé à l'API
+    const body = {
+      id: id,
+      competition_nom: updatedData.competition_nom,
+      competition_date: updatedData.competition_date,
+      competition_statut: updatedData.competition_statut
+    };
     const url = 'http://prod-project-32/api/competition/updateCompetition';
-    const params = { updatedData: updatedData };
-    return this.http.post(url, { params });
+    return this.http.put(url, body);
   }
 
   // updateCompetition(id: number, data: Partial<Competition>): Observable<Competition | undefined> {
@@ -212,13 +219,14 @@ export class CompetitionService {
     this.IsCoonected = isConnected;
   }
   
-  CreateQRcodeAPI(securite_jey_id: string, juge_id: number, competition_id: number): Observable<any> {
+  CreateQRcodeAPI(securite_key_id: string, juge_id: number, competition_id: number): Observable<any> {
     const url = 'http://prod-project-32/api/securite/CreateSecurite';
     const body = {
-      securite_jey_id: securite_jey_id,
+      securite_key_id: securite_key_id,
       juge_id: juge_id,
       competition_id: competition_id
     };
+    console.log(body);
     return this.http.post(url, body);
   }
   

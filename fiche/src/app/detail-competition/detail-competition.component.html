@@ -1,20 +1,20 @@
 <h1 class="title">Détails de la compétition</h1>
 <div class="formContainer2">
-    <form class="formulaire" action="">
+    <form class="formulaire" (ngSubmit)="updateCompetition()">
         <label class="labelid" for="id">Nom</label><br>
-        <input id="id" type="text" required value="{{ competition_nom }}"><br>
+        <input id="id" type="text" required name="competition_nom" [(ngModel)]="competition_nom"><br>
         <label class="labelpw" for="pw">Date</label><br>
-        <input id="pw" type="date" required value="{{ competition_date }}"><br>
+        <input id="pw" type="date" required name="competition_date" [(ngModel)]="competition_date"><br>
         <label class="labelpw" for="pw">Status</label><br>
-        <select id="status" required>
-            <option value="" selected>{{ competition_statut }}</option>
-            <option value="en_attente">En attente</option>
-            <option value="en_cours">En cours</option>
-            <option value="termine">Terminé</option>
+        <select id="status" required name="competition_statut" [(ngModel)]="competition_statut">
+            <option [ngValue]="null">-- Sélectionner un statut --</option>
+            <option [ngValue]="1">En attente</option>
+            <option [ngValue]="2">En cours</option>
+            <option [ngValue]="3">Terminée</option>
         </select><br>
         <div class="btn">
-            <button type="submit" class="submit" (click)="updateCompetition()">Enregistrer</button>
-            <button type="submit" class="delete">Supprimer</button>
+            <button class="submit" type="submit">Enregistrer</button>
+            <button class="delete">Supprimer</button>
         </div>
     </form>
 </div>
