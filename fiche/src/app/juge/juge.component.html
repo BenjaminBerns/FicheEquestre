@@ -1,1 +1,28 @@
-<p>juge works!</p>
+<div class="container">
+    <h1>Liste des Juges</h1>
+    <table>
+        <thead>
+            <tr>
+                <th class="border-radius-left">Prénom</th>
+                <th>Nom</th>
+                <th>Nom d'utilisateur</th>
+                <th>Modifier</th>
+                <th class="border-radius-right">Affichage QR-code</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let juge of juges">
+                <td>{{ juge.firstname }}</td>
+                <td>{{ juge.surename }}</td>
+                <td>{{ juge.username }}</td>
+                <td>
+                    <a class="detail-link">Consulter</a>
+                    <!-- <a class="detail-link" [routerLink]="['/juges', juge.id, 'modifier']">Modifier</a> -->
+                </td>
+                <td>
+                    <img class="icon" src="qr.png" alt="" (click)="qrcode()">
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

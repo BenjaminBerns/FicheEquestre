@@ -60,6 +60,7 @@ tr:hover {
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
     padding: 50px;
     margin: 200px;
     background-color: #FFF2D5;

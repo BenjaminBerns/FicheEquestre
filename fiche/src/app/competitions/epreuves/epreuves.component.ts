@@ -14,6 +14,7 @@ import { EpreuvesService } from '../../services/epreuves.service';
 export class EpreuvesComponent implements OnInit {
   epreuves: Epreuve[] = [];
   competitionId: number = 0;
+  id_juge: string | null = null;
 
   constructor(
     private route: ActivatedRoute,
@@ -34,8 +35,8 @@ export class EpreuvesComponent implements OnInit {
     });
   }
 
-  DetailsPopUp(epreuve_id: number) {
-    this.router.navigate(['/pop-up', epreuve_id]);
+  DetailsPopUp(epreuve_id: number, juge_id: number) {
+    this.router.navigate(['/pop-up/epreuve', epreuve_id, 'juge', juge_id]);
   }
 
   supprimerEpreuve(epreuve_id: number) {

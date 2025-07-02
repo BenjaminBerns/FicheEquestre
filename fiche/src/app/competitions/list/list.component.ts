@@ -27,11 +27,11 @@ export class ListComponent implements OnInit {
   }
 
   DetailsPopUp(epreuve_id: number) {
-    this.router.navigate(['/pop-up', epreuve_id]);
+    this.router.navigate(['/pop-up/competition', epreuve_id]);
   }
 
   supprimerCompetition(id: number): void {
     console.log('Suppression de la compétition avec ID :', id);
-    // plus tard : confirmation + appel à l'API
+    // plus tard : confirmation + appel à l'API si besoin pour les compétitions
   }
 }

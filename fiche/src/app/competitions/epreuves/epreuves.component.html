@@ -1,6 +1,6 @@
-<h2>Épreuves de la compétition n°{{ competitionId }}</h2>
 
 <div class="container">
+  <h1>Épreuves de la compétition n°{{ competitionId }}</h1>
   <table *ngIf="epreuves.length > 0; else noEpreuves" class="table">
     <thead>
       <tr>
@@ -21,7 +21,7 @@
         <td>{{ ep.juge_id }}</td>
         <td>{{ ep.notation_type }}</td>
         <td>
-          <button (click)="DetailsPopUp(ep.epreuve_id)" class="detail-link">Voir</button>
+          <button (click)="DetailsPopUp(ep.epreuve_id, ep.juge_id)" class="detail-link">Voir</button>
         </td>
         <td>
           <button style="border-radius: 100px;" (click)="supprimerEpreuve(ep.epreuve_id)"><img class="icon"

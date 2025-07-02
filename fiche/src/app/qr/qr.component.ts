@@ -3,7 +3,7 @@ import { CompetitionService } from '../services/competition.service';
 import { QRCodeComponent } from 'angularx-qrcode';
 import { FormsModule } from '@angular/forms';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-qr',
@@ -12,31 +12,50 @@ import { Router } from '@angular/router';
   styleUrl: './qr.component.css'
 })
 export class QRComponent {
-  constructor(private http: HttpClient, private competitionService: CompetitionService, private router: Router) {}
+  constructor(
+    private http: HttpClient,
+    private competitionService: CompetitionService,
+    private router: Router,
+    private route: ActivatedRoute
+  ) { }
 
 
   qrcode: string = '';
   req: any = '';
+  err: any = '';
+  id_competition: string | null = null;
+  id_juge: string | null = null;
 
   ngOnInit() {
+    
+    this.id_competition = this.route.snapshot.paramMap.get('id_competition');
+    this.id_juge = this.route.snapshot.paramMap.get('id_juge');
+    console.log("id compétition : ", this.id_competition, " | id juge : ", this.id_juge);
     this.qrcode = this.competitionService.createQrCode();
-    this.competitionService.QRcodeExist('ExempleEEEuuuuu').subscribe({
+    this.competitionService.QRcodeExist(this.qrcode).subscribe({
       next: (response) => {
-        console.log('Réponse :', response);
         this.req = response;
+        console.log('Réponse :', response.status);
       },
       error: (err) => {
         console.error('Erreur API', err);
+        this.err = err.error.status;
+        console.log('Erreur :', err.error.status);
       }
     });
-    if (this.req == null) {
-      this.competitionService.CreateQRcodeAPI(this.qrcode, 3, 100).subscribe({
+    if (this.err == false) {
+      this.competitionService.CreateQRcodeAPI(this.qrcode, Number(this.id_juge), Number(this.id_competition)).subscribe({
       next: (response) => {
-        console.log('Réponse :', response);
+        console.log('Réponse status :', response);
         this.req = response;
       },
       error: (err) => {
         console.error('Erreur API', err);
+        this.qrcode = err.error.data.securite_key_id;
+        console.log(this.qrcode);
+        if (this.qrcode != null) {
+          console.log("QR code existant reçu !");
+        }
       }
     });
     }

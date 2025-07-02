@@ -219,13 +219,14 @@ export class CompetitionService {
     this.IsCoonected = isConnected;
   }
   
-  CreateQRcodeAPI(securite_jey_id: string, juge_id: number, competition_id: number): Observable<any> {
+  CreateQRcodeAPI(securite_key_id: string, juge_id: number, competition_id: number): Observable<any> {
     const url = 'http://prod-project-32/api/securite/CreateSecurite';
     const body = {
-      securite_jey_id: securite_jey_id,
+      securite_key_id: securite_key_id,
       juge_id: juge_id,
       competition_id: competition_id
     };
+    console.log(body);
     return this.http.post(url, body);
   }
   
