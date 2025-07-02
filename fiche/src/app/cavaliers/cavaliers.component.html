@@ -1,0 +1,40 @@
+<h2>Gestion des Cavaliers</h2>
+
+<form (ngSubmit)="isEditing ? updateCavalier() : addCavalier()">
+  <input [(ngModel)]="selectedCavalier.firstname" name="firstname" placeholder="Prénom" required />
+  <input [(ngModel)]="selectedCavalier.lastname" name="lastname" placeholder="Nom" required />
+  <input [(ngModel)]="selectedCavalier.email" name="email" type="email" placeholder="Email" required />
+  <input [(ngModel)]="selectedCavalier.phone" name="phone" placeholder="Téléphone" required />
+  <input [(ngModel)]="selectedCavalier.birthdate" name="birthdate" type="date" required />
+  <input [(ngModel)]="selectedCavalier.licence_number" name="licence" placeholder="Numéro de licence" required />
+  <button type="submit">{{ isEditing ? 'Mettre à jour' : 'Ajouter' }}</button>
+  <button type="button" (click)="cancelEdit()">Annuler</button>
+</form>
+
+<table>
+  <thead>
+    <tr>
+      <th>Prénom</th>
+      <th>Nom</th>
+      <th>Email</th>
+      <th>Téléphone</th>
+      <th>Date de naissance</th>
+      <th>Licence</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let cav of cavaliers">
+      <td>{{ cav.firstname }}</td>
+      <td>{{ cav.lastname }}</td>
+      <td>{{ cav.email }}</td>
+      <td>{{ cav.phone }}</td>
+      <td>{{ cav.birthdate }}</td>
+      <td>{{ cav.licence_number }}</td>
+      <td>
+        <button (click)="editCavalier(cav)">✏️</button>
+        <button (click)="deleteCavalier(cav.cavalier_id)">🗑️</button>
+      </td>
+    </tr>
+  </tbody>
+</table>

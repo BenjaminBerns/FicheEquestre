@@ -1,0 +1,46 @@
+<h2>Gestion des Juges</h2>
+
+<div class="formContainer">
+  <table *ngIf="juges.length > 0; else noJuges" class="table">
+    <thead>
+      <tr>
+        <th class="border-radius-left">Prénom</th>
+        <th>Nom</th>
+        <th>Nom d'utilisateur</th>
+        <th>Rôle</th>
+        <th>Actions</th>
+        <th class="border-radius-right"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let juge of juges">
+        <td>{{ juge.firstname }}</td>
+        <td>{{ juge.surename }}</td>
+        <td>{{ juge.username }}</td>
+        <td>{{ juge.role_id }}</td>
+        <td>
+          <button (click)="editJuge(juge)">Modifier</button>
+          <button (click)="deleteJuge(juge.juge_id)">Supprimer</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div style="margin-top: 30px;">
+  <h3 *ngIf="isEditing">Modifier Juge</h3>
+  <h3 *ngIf="!isEditing">Ajouter un nouveau Juge</h3>
+  <form (ngSubmit)="isEditing ? updateJuge() : addJuge()">
+    <input [(ngModel)]="nouveauJuge.firstname" name="firstname" placeholder="Prénom" required />
+    <input [(ngModel)]="nouveauJuge.surename" name="surename" placeholder="Nom" required />
+    <input [(ngModel)]="nouveauJuge.username" name="username" placeholder="Nom d'utilisateur" required />
+    <input [(ngModel)]="nouveauJuge.password" name="password" placeholder="Mot de passe" required />
+    <input type="number" [(ngModel)]="nouveauJuge.role_id" name="role_id" placeholder="Role ID" required />
+    <button type="submit">{{ isEditing ? 'Mettre à jour' : 'Ajouter' }}</button>
+    <button type="button" (click)="isEditing = false; nouveauJuge = {}">Annuler</button>
+  </form>
+</div>
+
+<ng-template #noJuges>
+  <p>Aucun juge pour le moment.</p>
+</ng-template>
