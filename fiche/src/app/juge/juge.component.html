@@ -1,6 +1,6 @@
 <div class="container">
     <h1>Liste des Juges</h1>
-    <table>
+    <table *ngIf="juges">
         <thead>
             <tr>
                 <th class="border-radius-left">Prénom</th>
@@ -11,16 +11,16 @@
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let juge of juges">
-                <td>{{ juge.firstname }}</td>
-                <td>{{ juge.surename }}</td>
-                <td>{{ juge.username }}</td>
+            <tr >
+                <td>{{ juges.firstname }}</td>
+                <td>{{ juges.surename }}</td>
+                <td>{{ juges.username }}</td>
                 <td>
-                    <a class="detail-link"  [routerLink]="['/juges/detail-juge', juge_id]">Consulter</a>
+                    <a class="detail-link" [routerLink]="['/juges/detail-juge', juge_id]">Consulter</a>
                     <!-- <a class="detail-link" [routerLink]="['/juges', juge.id, 'modifier']">Modifier</a> -->
                 </td>
                 <td>
-                    <img [routerLink]="['/qr-code/competition', competiton_id, 'juge', juge_id]" class="icon" src="qr.png" alt="" (click)="qrcode()">
+                    <img [routerLink]="['/qr-code/competition', competiton_id, 'juge', juge_id]" class="icon" src="qr.png" alt="">
                 </td>
             </tr>
         </tbody>

@@ -30,25 +30,30 @@ export class DetailJugeComponent {
   role_id: number | null = null;
   date_auth: string | Date |  null = null;
   response: string = '';
-  competition_id: number | null = null;
+  competition_id: number = 0;
   
   updatedData: any = null;
   
   ngOnInit(): void {
     this.id = this.route.snapshot.paramMap.get('id');
+    this.JugesService.getCompetitionByJuge(Number(this.id)).subscribe(data => {
+      this.competition_id = data.data[0].competition_id;
+      console.log('this.competition_id', this.competition_id);
+    })
+
     const idNumber = this.id !== null ? Number(this.id) : null;
     if (idNumber !== null && !isNaN(idNumber)) {
-      this.JugesService.getJugesByCompetition(idNumber).subscribe(data => {
-        console.log('Voici les données récupérer : ', data);
+      this.JugesService.getJugesById(idNumber).subscribe(data => {
+        console.log('Voici les données récupérer : ', data.data);
         
         const Juge: import('../services/juges.service').Juge = {
-          juge_id: data.data[0].juge_id,
-          firstname: data.data[0].firstname,
-          surename: data.data[0].surename,
-          username: data.data[0].username,
-          password: data.data[0].password,
-          role_id: data.data[0].role_id,
-          date_auth: data.data[0].date_auth
+          juge_id: data.data.juge_id,
+          firstname: data.data.firstname,
+          surename: data.data.surename,
+          username: data.data.username,
+          password: data.data.password,
+          role_id: data.data.role_id,
+          date_auth: data.data.date_auth
             ? (() => {
                 const dateObj = new Date(data.competition_date);
                 const year = dateObj.getFullYear();
@@ -57,14 +62,14 @@ export class DetailJugeComponent {
                 return `${year}-${month}-${day}`;
               })()
             : null,
-          response: data.data[0].response,
+          response: data.data.response,
           competition_juge: {
-            juge_id: data.data[0].competition_juge.juge_id,
-            competition_id: data.data[0].competition_juge.competition_id
+            juge_id: data.data.juge_id,
+            competition_id: this.competition_id
           }
         };
 
-        console.log(Juge);
+        console.log('Juge : ', Juge);
 
         this.juge_id = Juge.juge_id;
         this.firstname = Juge.firstname;

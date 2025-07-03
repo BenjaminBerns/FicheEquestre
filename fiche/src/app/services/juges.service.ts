@@ -117,9 +117,23 @@ export class JugesService {
   // }
 
   getJugesByCompetition(id: number): Observable<any> {
-    console.log('ID JUGE : ', id);
+    console.log('ID Compétition : ', id);
     const url = 'http://prod-project-32/api/competition/getJugesByCompetition';
     const params = { id: id };
+    return this.http.get(url, { params });
+  }
+
+  getJugesById(id: number): Observable<any> {
+    console.log('ID JUGE : ', id);
+    const url = 'http://prod-project-32/api/juge/getSpecificJuge';
+    const params = { id: id };
+    return this.http.get(url, { params });
+  }
+
+  getCompetitionByJuge(jugeId: number): Observable<any> {
+    console.log('JUGEID : ', jugeId);
+    const url = 'http://prod-project-32/api/juge/getCompetitionsByJuge';
+    const params = { jugeId: jugeId };
     return this.http.get(url, { params });
   }
 
