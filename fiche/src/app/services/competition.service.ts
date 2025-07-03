@@ -130,8 +130,12 @@ export class CompetitionService {
   //   return of(this.fakeCompetitions);
   // }
 
+  GetStatusNotif() {
+    
+  }
+
   getAllCompetitions(): Observable<any> {
-    const url = 'http://prod-project-32/competition/getAllCompetitions';
+    const url = 'http://prod-project-32/api/competition/getAllCompetitions';
     return this.http.get(url);
   }
 
@@ -161,10 +165,29 @@ export class CompetitionService {
   //   return of(found);
   // }
 
-  getCompetitionById(id: number): Observable<any> {
-    const url = 'http://prod-project-32/qrcode/getCompetitionDataFromToken';
+  getCompetitionByToken(id: number): Observable<any> {
+    const url = 'http://prod-project-32/api/qrcode/getCompetitionDataFromToken';
     const params = { id: id };
     return this.http.get(url, { params });
+  }
+
+  getCompetitionById(id: number): Observable<any> {
+    const url = 'http://prod-project-32/api/competition/getSpecificCompetition';
+    const params = { id: id };
+    return this.http.get(url, { params });
+  }
+
+  UpdateCompetition(id: number, updatedData: Competition): Observable<any> {
+    console.log("updatedData : -->", updatedData);
+    // Ajout du paramètre id dans le corps envoyé à l'API
+    const body = {
+      id: id,
+      competition_nom: updatedData.competition_nom,
+      competition_date: updatedData.competition_date,
+      competition_statut: updatedData.competition_statut
+    };
+    const url = 'http://prod-project-32/api/competition/updateCompetition';
+    return this.http.put(url, body);
   }
 
   // updateCompetition(id: number, data: Partial<Competition>): Observable<Competition | undefined> {
@@ -180,7 +203,7 @@ export class CompetitionService {
   // }
 
   // DeleteCompetition(id: number) Observable<any> {
-  //   const url = 'http://prod-project-32/competition/Delete';
+  //   const url = 'http://prod-project-32/api/competition/Delete';
   //   const params = { id: id };
   //   return this.http.get(url, { params });
   // }
@@ -196,18 +219,19 @@ export class CompetitionService {
     this.IsCoonected = isConnected;
   }
   
-  CreateQRcodeAPI(securite_jey_id: string, juge_id: number, competition_id: number): Observable<any> {
-    const url = 'http://prod-project-32/securite/CreateSecurite';
+  CreateQRcodeAPI(securite_key_id: string, juge_id: number, competition_id: number): Observable<any> {
+    const url = 'http://prod-project-32/api/securite/CreateSecurite';
     const body = {
-      securite_jey_id: securite_jey_id,
+      securite_key_id: securite_key_id,
       juge_id: juge_id,
       competition_id: competition_id
     };
+    console.log(body);
     return this.http.post(url, body);
   }
   
   QRcodeExist(token: string): Observable<any> {
-    const url = 'http://prod-project-32/qrcode/getCompetitionDataFromToken';
+    const url = 'http://prod-project-32/api/qrcode/getCompetitionDataFromToken';
     const params = { token: token };
     return this.http.get(url, { params });
   }

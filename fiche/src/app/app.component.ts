@@ -7,16 +7,16 @@ import { FormsModule } from '@angular/forms';
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, RouterLink, RouterModule],
+  imports: [RouterOutlet, RouterLink, RouterModule, NgIf],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
 export class AppComponent {
 
-  // constructor(private competitionService: CompetitionService) {}
+//   constructor(private competitionService: CompetitionService) {}
 
-  // // Getter propre
-  // get IsConnected(): boolean {
-  //   return this.competitionService.IsConnected;
-  // }
+//   // Getter propre
+//   get IsConnected(): boolean {
+//     return this.competitionService.IsConnected;
+//   }
 }

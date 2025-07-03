@@ -1,0 +1,15 @@
+<h1 class="title">Détails de l'épreuve</h1>
+<div class="formContainer2">
+    <form class="formulaire" (ngSubmit)="updateEpreuve()">
+        <label class="labelid" for="id">Nom</label><br>
+        <input id="id" type="text" required name="epreuve_name" [(ngModel)]="epreuve_name"><br>
+        <label class="labelpw" for="pw">Description</label><br>
+        <input id="pw" type="text" required name="epreuve_description" [(ngModel)]="epreuve_description"><br>
+        <label class="labelpw" for="pw">Matéiriels</label><br>
+        <input id="pw" type="text" required name="epreuve_materiels" [(ngModel)]="epreuve_materiels"><br>
+        <div class="btn">
+            <button class="submit" type="submit">Enregistrer</button>
+            <button class="delete">Supprimer</button>
+        </div>
+    </form>
+</div>
