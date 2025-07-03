@@ -2,10 +2,13 @@
     <div class="container">
         <img src="danger.png" alt="">
             <h1>Redirection !</h1>
-        <p>Souhaitez vous séléctionner le détails des compétitions ou des juges affecter à la compétition ?</p>
+        <p *ngIf="isEpreuve" >Souhaitez vous séléctionner le détails des épreuves ou des juges affecter à cette épreuve ?</p>
+        <p *ngIf="!isEpreuve">Souhaitez vous séléctionner le détails des compétitions ou des juges affecter à cette compétition ?</p>
         <div class="btn-container">
-            <button [routerLink]="['/detail-competition', id]">Compétitions</button>
-            <button>Juges</button>
+            <button *ngIf="isEpreuve" [routerLink]="['/detail-epreuves', id]">Epreuves</button>
+            <button *ngIf="!isEpreuve" [routerLink]="['/detail-competition', id]">Compétitions</button>
+            <button *ngIf="isEpreuve" [routerLink]="['/juges/epreuve', juge_id]">Juges</button>
+            <button *ngIf="!isEpreuve" [routerLink]="['/juges/competition', juge_id]">Juges</button>
         </div>
     </div>
 </div>
