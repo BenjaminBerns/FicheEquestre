@@ -1,0 +1,31 @@
+<h2 *ngIf="epreuveId">Notations pour l'épreuve #{{ epreuveId }}</h2>
+<h2 *ngIf="!epreuveId">Toutes les notations</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Notation ID</th>
+      <th>Contrat</th>
+      <th>Allure</th>
+      <th>Pénalité</th>
+      <th>Style</th>
+      <th>Total</th>
+      <th>Cavalier</th>
+      <th>Épreuve</th>
+      <th>Niveau</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let n of notations">
+      <td>{{ n.notation_id }}</td>
+      <td>{{ n.contrat_notation }}</td>
+      <td>{{ n.allure_notation }}</td>
+      <td>{{ n.penalite_notation }}</td>
+      <td>{{ n.style_notation }}</td>
+      <td>{{ n.total }}</td>
+      <td>{{ n.cavalier_id }}</td>
+      <td>{{ n.epreuve_id }}</td>
+      <td>{{ n.niveau_id }}</td>
+    </tr>
+  </tbody>
+</table>

@@ -15,6 +15,7 @@ import { JugesComponent } from './juges/juges.component';
 import { CavaliersComponent } from './cavaliers/cavaliers.component';
 import { DetailJugeComponent } from './detail-juge/detail-juge.component';
 import { PortailAppComponent } from './portail-app/portail-app.component';
+import { NotationsComponent } from './notations/notations.component';
 
 export const routes: Routes = [
   //----------------------Accueil + Connexion--------------------//
@@ -54,6 +55,10 @@ export const routes: Routes = [
   { path: 'juges', component: JugesComponent },
   { path: 'epreuves', component: EpreuvesComponent },
   { path: 'cavaliers', component: CavaliersComponent },
+
+  //----------------------Notations--------------------//
+  { path: 'notations', component: NotationsComponent },
+  { path: 'notations/epreuve/:id', component: NotationsComponent }, 
 
   { path: 'app-download', component: PortailAppComponent },
 ];
