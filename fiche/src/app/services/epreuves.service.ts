@@ -57,7 +57,7 @@ export class EpreuvesService {
   getAllEpreuves(id: number): Observable<any> {
     const url = 'http://prod-project-32/api/epreuve/getAllEpreuvesOfCompetition';
     const params = { id: id };
-    console.log(id);
+    console.log('id compétition : ', id);
     return this.http.get(url, { params });
   }
 

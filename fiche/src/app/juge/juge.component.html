@@ -16,11 +16,11 @@
                 <td>{{ juge.surename }}</td>
                 <td>{{ juge.username }}</td>
                 <td>
-                    <a class="detail-link">Consulter</a>
+                    <a class="detail-link"  [routerLink]="['/juges/detail-juge', juge_id]">Consulter</a>
                     <!-- <a class="detail-link" [routerLink]="['/juges', juge.id, 'modifier']">Modifier</a> -->
                 </td>
                 <td>
-                    <img class="icon" src="qr.png" alt="" (click)="qrcode()">
+                    <img [routerLink]="['/qr-code/competition', competiton_id, 'juge', juge_id]" class="icon" src="qr.png" alt="" (click)="qrcode()">
                 </td>
             </tr>
         </tbody>

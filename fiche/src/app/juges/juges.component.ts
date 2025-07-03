@@ -19,45 +19,45 @@ interface Juge {
   selector: 'app-juges',
   templateUrl: './juges.component.html',
   styleUrls: ['./juges.component.css'],
-  imports: [FormsModule, NgIf, NgFor]
+  imports: [FormsModule]
 })
 export class JugesComponent implements OnInit {
-  juges: Juge[] = [];
-  nouveauJuge: Partial<Juge> = {};
-  isEditing: boolean = false;
+  // juges: Juge[] = [];
+  // nouveauJuge: Partial<Juge> = {};
+  // isEditing: boolean = false;
 
-  constructor(private jugesService: JugesService) {}
+  // constructor(private jugesService: JugesService) {}
 
-  ngOnInit(): void {
-    this.getJuges();
-  }
+   ngOnInit(): void {
+     //this.getJuges();
+   }
 
-  getJuges(): void {
-    this.jugesService.getJuges().subscribe(data => this.juges = data);
-  }
+  // getJuges(): void {
+  //   this.jugesService.getJuges().subscribe(data => this.juges = data);
+  // }
 
-  addJuge(): void {
-    this.jugesService.createJuge(this.nouveauJuge).subscribe(() => {
-      this.getJuges();
-      this.nouveauJuge = {};
-    });
-  }
+  // addJuge(): void {
+  //   this.jugesService.createJuge(this.nouveauJuge).subscribe(() => {
+  //     this.getJuges();
+  //     this.nouveauJuge = {};
+  //   });
+  // }
 
-  editJuge(juge: Juge): void {
-    this.nouveauJuge = { ...juge };
-    this.isEditing = true;
-  }
+  // editJuge(juge: Juge): void {
+  //   this.nouveauJuge = { ...juge };
+  //   this.isEditing = true;
+  // }
 
-  updateJuge(): void {
-    if (!this.nouveauJuge.juge_id) return;
-    this.jugesService.updateJuge(this.nouveauJuge).subscribe(() => {
-      this.getJuges();
-      this.nouveauJuge = {};
-      this.isEditing = false;
-    });
-  }
+  // updateJuge(): void {
+  //   if (!this.nouveauJuge.juge_id) return;
+  //   this.jugesService.updateJuge(this.nouveauJuge).subscribe(() => {
+  //     this.getJuges();
+  //     this.nouveauJuge = {};
+  //     this.isEditing = false;
+  //   });
+  // }
 
-  deleteJuge(id: number): void {
-    this.jugesService.deleteJuge(id).subscribe(() => this.getJuges());
-  }
+  // deleteJuge(id: number): void {
+  //   this.jugesService.deleteJuge(id).subscribe(() => this.getJuges());
+  // }
 }

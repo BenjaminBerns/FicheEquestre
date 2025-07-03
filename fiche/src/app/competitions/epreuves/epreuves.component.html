@@ -1,6 +1,6 @@
 
 <!-- Formulaire d'ajout / modification -->
-<div style="margin: 30px 0;">
+<!-- <div class="container">
   <form (ngSubmit)="isEditing ? updateEpreuve() : addEpreuve()">
     <input [(ngModel)]="selectedEpreuve.epreuve_name" name="name" placeholder="Nom de l'épreuve" required />
     <input [(ngModel)]="selectedEpreuve.epreuve_description" name="desc" placeholder="Description" required />
@@ -11,7 +11,7 @@
     <button type="submit">{{ isEditing ? 'Mettre à jour' : 'Ajouter' }}</button>
     <button type="button" (click)="cancelEdit()">Annuler</button>
   </form>
-</div>
+</div> -->
 
 <!-- Tableau des épreuves -->
 <div class="container">
@@ -37,11 +37,12 @@
         <td>{{ ep.notation_type }}</td>
         <td>
           <button (click)="DetailsPopUp(ep.epreuve_id, ep.juge_id)" class="detail-link">Voir</button>
-          <button class="detail-link" (click)="getEpreuveDetails(ep.epreuve_id)">Voir</button>
+          <!-- <button class="detail-link" (click)="getEpreuveDetails(ep.epreuve_id)">Voir</button> -->
         </td>
         <td>
-          <button (click)="editEpreuve(ep)">✏️</button>
-          <button (click)="deleteEpreuve(ep.epreuve_id)">🗑️</button>
+          <img class="icon" src="delete.png">
+          <!-- <button (click)="editEpreuve(ep)">✏️</button>
+          <button (click)="deleteEpreuve(ep.epreuve_id)">🗑️</button> -->
         </td>
       </tr>
     </tbody>
@@ -53,11 +54,11 @@
 </ng-template>
 
 <!-- Détail sélectionné -->
-<div *ngIf="epreuveDetail">
+<!-- <div *ngIf="epreuveDetail">
   <h3>Détail de l'épreuve sélectionnée :</h3>
   <p><strong>Nom :</strong> {{ epreuveDetail.epreuve_name }}</p>
   <p><strong>Description :</strong> {{ epreuveDetail.epreuve_description }}</p>
   <p><strong>Matériels :</strong> {{ epreuveDetail.epreuve_materiels }}</p>
   <p><strong>Juge ID :</strong> {{ epreuveDetail.juge_id }}</p>
   <p><strong>Notation :</strong> {{ epreuveDetail.notation_type }}</p>
-</div>
+</div> -->

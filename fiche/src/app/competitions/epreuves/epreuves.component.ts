@@ -29,10 +29,15 @@ export class EpreuvesComponent implements OnInit {
     this.competitionId = Number(this.route.snapshot.paramMap.get('id'));
     this.loadEpreuves();
   }
+  
+  DetailsPopUp(epreuve_id: number, juge_id: number) {
+    this.router.navigate(['/pop-up/epreuve', epreuve_id, 'juge', juge_id]);
+  }
 
   loadEpreuves(): void {
     this.service.getAllEpreuves(this.competitionId).subscribe(res => {
       this.epreuves = res.data;
+      console.log('EPREUVES REAL : ',this.epreuves);
     });
   }
 
@@ -55,8 +60,6 @@ export class EpreuvesComponent implements OnInit {
     });
   }
 
-  DetailsPopUp(epreuve_id: number, juge_id: number) {
-    this.router.navigate(['/pop-up/epreuve', epreuve_id, 'juge', juge_id]);
   editEpreuve(epreuve: Epreuve): void {
     this.selectedEpreuve = { ...epreuve };
     this.isEditing = true;
