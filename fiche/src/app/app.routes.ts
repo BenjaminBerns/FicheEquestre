@@ -14,6 +14,7 @@ import { config } from 'rxjs';
 import { JugesComponent } from './juges/juges.component';
 import { CavaliersComponent } from './cavaliers/cavaliers.component';
 import { DetailJugeComponent } from './detail-juge/detail-juge.component';
+import { PortailAppComponent } from './portail-app/portail-app.component';
 
 export const routes: Routes = [
   //----------------------Accueil + Connexion--------------------//
@@ -53,4 +54,6 @@ export const routes: Routes = [
   { path: 'juges', component: JugesComponent },
   { path: 'epreuves', component: EpreuvesComponent },
   { path: 'cavaliers', component: CavaliersComponent },
+
+  { path: 'app-download', component: PortailAppComponent },
 ];
