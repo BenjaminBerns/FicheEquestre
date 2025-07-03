@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CavaliersService, Cavalier } from '../services/cavaliers.service';
 import { FormsModule, NgModel } from '@angular/forms';
-import { NgFor, NgIf } from '@angular/common';
+import { NgFor } from '@angular/common';
 
 @Component({
   selector: 'app-cavaliers',
