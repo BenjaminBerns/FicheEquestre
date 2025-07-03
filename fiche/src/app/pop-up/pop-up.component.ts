@@ -26,4 +26,9 @@ constructor(
     this.isEpreuve = this.router.url.includes('epreuve');
     this.juge_id = this.route.snapshot.paramMap.get('juge_id');
   }
+
+  testJugeId(): void{
+    this.juge_id = this.route.snapshot.paramMap.get('juge_id');
+    console.log(this.juge_id);
+  }
 }
