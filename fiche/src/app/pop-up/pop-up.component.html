@@ -7,8 +7,8 @@
         <div class="btn-container">
             <button *ngIf="isEpreuve" [routerLink]="['/detail-epreuves', id]">Epreuves</button>
             <button *ngIf="!isEpreuve" [routerLink]="['/detail-competition', id]">Compétitions</button>
-            <button *ngIf="isEpreuve" [routerLink]="['/juges/epreuve', id]">Juges</button>
-            <button *ngIf="!isEpreuve" [routerLink]="['/juges/competition', id]">Juges</button>
+            <button *ngIf="isEpreuve" [routerLink]="['/juges/epreuve', juge_id]">Juges</button>
+            <button *ngIf="!isEpreuve" [routerLink]="['/juges/competition', juge_id]">Juges</button>
         </div>
     </div>
 </div>

@@ -7,7 +7,7 @@ import { NgFor, NgIf } from '@angular/common';
   selector: 'app-cavaliers',
   templateUrl: './cavaliers.component.html',
   styleUrls: ['./cavaliers.component.css'],
-  imports : [FormsModule, NgIf, NgFor]
+  imports : [FormsModule, NgFor]
 })
 export class CavaliersComponent implements OnInit {
   cavaliers: Cavalier[] = [];

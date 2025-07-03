@@ -13,6 +13,7 @@ import { DetailEpreuveComponent } from './detail-epreuve/detail-epreuve.componen
 import { config } from 'rxjs';
 import { JugesComponent } from './juges/juges.component';
 import { CavaliersComponent } from './cavaliers/cavaliers.component';
+import { DetailJugeComponent } from './detail-juge/detail-juge.component';
 
 export const routes: Routes = [
   //----------------------Accueil + Connexion--------------------//
@@ -32,7 +33,8 @@ export const routes: Routes = [
   
   //----------------------Juges--------------------//
   { path: 'juges/competition/:id', component: JugeComponent},
-  { path: 'juges/epreuve/:id', component: JugeComponent },  
+  { path: 'juges/epreuve/:id', component: JugeComponent }, 
+  { path: 'juges/detail-juge/:id', component: DetailJugeComponent},
 
   //----------------------Epreuves--------------------//
   { path: 'detail-epreuves/:id', component: DetailEpreuveComponent },
@@ -47,7 +49,7 @@ export const routes: Routes = [
   { path: 'listecompetitions', component: ListComponent},
   { path: 'formCompetitions', component: FormComponent },
   { path: 'competitions/ajouter', component: FormComponent },
-  { path: 'competitions/:id/modifier', component: FormComponent }
+  { path: 'competitions/:id/modifier', component: FormComponent },
   { path: 'juges', component: JugesComponent },
   { path: 'epreuves', component: EpreuvesComponent },
   { path: 'cavaliers', component: CavaliersComponent },
