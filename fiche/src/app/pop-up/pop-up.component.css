@@ -32,9 +32,38 @@ h1{
     gap: 0px;
 }
 
+.containerAdd {
+    width: 500px;
+    height: 400px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 70px;
+    margin: 200px;
+    background-color: #FFF2D5;
+    border-radius: 25px;
+    max-height: 500px;
+    gap: 0px;
+}
+
 .container img{
     width: 100px;
     height: 100px;
+}
+
+.containerAdd img {
+    width: 100px;
+    height: 100px;
+}
+
+.containerAdd .btn-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    width: 100%;
+    margin: 20px;
 }
 
 p{

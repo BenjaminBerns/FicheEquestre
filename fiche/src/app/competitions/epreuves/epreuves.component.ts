@@ -35,7 +35,7 @@ export class EpreuvesComponent implements OnInit {
   }
 
   loadEpreuves(): void {
-    this.service.getAllEpreuves(this.competitionId).subscribe(res => {
+    this.service.getAllEpreuvesbyCompetitionId(this.competitionId).subscribe(res => {
       this.epreuves = res.data;
       console.log('EPREUVES REAL : ',this.epreuves);
     });
