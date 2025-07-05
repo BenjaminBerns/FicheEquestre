@@ -67,10 +67,10 @@ export class CompetitionService {
   //   },
   //   {
   //     competition_id: 4,
-  //     competition_nom: 'Compétition de Marcy-l’Étoile',
+  //     competition_nom: 'Compétition de Marcy-l'Étoile',
   //     competition_date: '2025-01-04',
   //     statut: 'Terminée',
-  //     location: 'Marcy-l’Étoile',
+  //     location: 'Marcy-l'Étoile',
   //     createdBy: 101,
   //     createdAt: '2025-01-01T08:00:00Z'
   //   }
@@ -82,8 +82,8 @@ export class CompetitionService {
       competition_id: 1,
       juge_id: 10,
       notation_type: 1,
-      epreuve_name: 'Saut d’obstacles',
-      epreuve_description: 'Épreuve de saut d’obstacles classique',
+      epreuve_name: 'Saut d\'obstacles',
+      epreuve_description: 'Épreuve de saut d\'obstacles classique',
       epreuve_materiels: 'Matériel de saut, barres, plots'
     },
     {
@@ -102,7 +102,7 @@ export class CompetitionService {
       notation_type: 1,
       epreuve_name: 'Concours complet',
       epreuve_description: 'Épreuve de concours complet avec saut, dressage et cross',
-      epreuve_materiels: 'Saut d’obstacles, manège, parcours de cross'
+      epreuve_materiels: 'Saut d\'obstacles, manège, parcours de cross'
     },
     {
       epreuve_id: 4,
@@ -110,7 +110,7 @@ export class CompetitionService {
       juge_id: 13,
       notation_type: 2,
       epreuve_name: 'Endurance',
-      epreuve_description: 'Épreuve d’endurance sur un parcours de 20 km',
+      epreuve_description: 'Épreuve d\'endurance sur un parcours de 20 km',
       epreuve_materiels: 'Parcours balisé, points de contrôle'
     },
     {
@@ -120,7 +120,7 @@ export class CompetitionService {
       notation_type: 1,
       epreuve_name: 'Trec',
       epreuve_description: 'Épreuve de Trec avec maniabilité et vitesse',
-      epreuve_materiels: 'Parcours d’obstacles, chronomètre'
+      epreuve_materiels: 'Parcours d\'obstacles, chronomètre'
     }
   ];
 
@@ -132,6 +132,11 @@ export class CompetitionService {
 
   GetStatusNotif() {
     
+  }
+
+  CreateCompetition(data: Partial<Competition>): Observable<any> {
+    const url = 'http://prod-project-32/api/competition/createCompetition';
+    return this.http.post(url, data);
   }
 
   getAllCompetitions(): Observable<any> {
@@ -184,6 +189,7 @@ export class CompetitionService {
       id: id,
       competition_nom: updatedData.competition_nom,
       competition_date: updatedData.competition_date,
+      competition_location: updatedData.competition_location,
       competition_statut: updatedData.competition_statut
     };
     const url = 'http://prod-project-32/api/competition/updateCompetition';
@@ -235,4 +241,28 @@ export class CompetitionService {
     const params = { token: token };
     return this.http.get(url, { params });
   }
+
+  // getAllUser(): Observable<any> {
+  //   const url = 'http://prod-project-32/api/Users/getAllUsers';
+  //   return this.http.get(url);
+  // }
+
+  private connected = false;
+
+  setConnection(status: boolean) {
+    this.connected = status;
+  }
+
+  getConnection(): boolean {
+    return this.connected;
+  }
+
+  setConnectionAdmin(status: boolean) {
+    this.connected = status;
+  }
+
+  getConnectionAdmin(): boolean {
+    return this.connected;
+  }
+
 }

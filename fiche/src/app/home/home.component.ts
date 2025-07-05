@@ -9,6 +9,8 @@ import * as bcrypt from "bcryptjs";
   styleUrl: './home.component.css'
 })
 export class HomeComponent {
+
+  
   name = "Angular bcrypt";
   // derivedKey = pbkdf2.pbkdf2Sync('password', 'salt', 1, 64, 'sha512')
   salt = bcrypt.genSaltSync(10);
@@ -29,10 +31,12 @@ export class HomeComponent {
 
     let v1 = "$2b$10$OScs96LIOP/74ZnU7tY3ku.69tcRa7ZqPZT2CklianXuqVuk/r3/K";
     let v2 = "$2b$10$vkuXQEjzkuc5kpiPXYivF.8zCbhJoPwy4SUk5/9lwaUwohtfoU2Ga";
+    let v3 = "fetziLx4uNwPdhB67i1iFyVi8c3FmjhzZ";
     console.log(
       "Compare passwords: ",
       bcrypt.compareSync(this.rawString, v1),
-      bcrypt.compareSync(this.rawString, v2)
+      bcrypt.compareSync(this.rawString, v2),
+      bcrypt.compareSync(this.rawString, v3)
     );
   }
 }
