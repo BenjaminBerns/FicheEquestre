@@ -1,9 +1,11 @@
-<div class="container"><h1>Liste des Compétitions</h1>
+<div class="container">
+  <h1>Liste des Compétitions</h1>
   <table *ngIf="competitions.length > 0; else noData" class="table">
     <thead>
       <tr>
         <th class="border-radius-left">Nom</th>
         <th>Date</th>
+        <th>Lieu</th>
         <th>Statut</th>
         <th>Détails</th>
         <th>Epreuves</th>
@@ -14,6 +16,7 @@
       <tr *ngFor="let comp of competitions">
         <td>{{ comp.competition_nom }}</td>
         <td>{{ comp.competition_date ? (comp.competition_date | date: 'dd/MM/yyyy') : 'Non défini' }}</td>
+        <td>{{ comp.competition_location }}</td>
         <td>
           <ng-container [ngSwitch]="comp.competition_statut">
             <span *ngSwitchCase="1">En attente</span>
@@ -34,7 +37,7 @@
       </tr>
     </tbody>
   </table>
-<button class="btnadd" routerLink="formCompetitions">Ajouter une compétition</button>
+<button class="btnadd" routerLink="/pop-up/SetNombresEpreuves">Ajouter une compétition</button>
 </div>
 <ng-template #noData>
   <p>Aucune compétition disponible.</p>

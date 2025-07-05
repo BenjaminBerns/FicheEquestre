@@ -28,8 +28,8 @@ export class EpreuvesService {
       competition_id: 1,
       juge_id: 10,
       notation_type: 1,
-      epreuve_name: 'Saut d’obstacles',
-      epreuve_description: 'Épreuve de saut d’obstacles classique',
+      epreuve_name: "Saut d'obstacles",
+      epreuve_description: "Épreuve de saut d'obstacles classique",
       epreuve_materiels: 'Barres, plots, chandeliers'
     },
     {
@@ -54,7 +54,7 @@ export class EpreuvesService {
 
   constructor(private http: HttpClient) { }
 
-  getAllEpreuves(id: number): Observable<any> {
+  getAllEpreuvesbyCompetitionId(id: number): Observable<any> {
     const url = 'http://prod-project-32/api/epreuve/getAllEpreuvesOfCompetition';
     const params = { id: id };
     console.log('id compétition : ', id);
@@ -84,6 +84,20 @@ export class EpreuvesService {
     const url = 'http://prod-project-32/api/epreuve/updateEpreuve';
     return this.http.put(url, body);
   }
+
+  // Nouvelle méthode pour créer une épreuve via l'API
+  createEpreuve(epreuveData: Partial<Epreuve>): Observable<any> {
+    const url = 'http://prod-project-32/api/epreuve/createEpreuve';
+    return this.http.post(url, epreuveData);
+  }
+
+  // Méthode pour supprimer une épreuve via l'API
+  deleteEpreuve(epreuveId: number): Observable<any> {
+    const url = 'http://prod-project-32/api/epreuve/deleteEpreuve';
+    const params = { id: epreuveId };
+    return this.http.delete(url, { params });
+  }
+
   getEpreuveById(id: number): Observable<Epreuve | null> {
     const epreuve = this.fakeEpreuves.find(e => e.epreuve_id === id);
     return of(epreuve || null);
@@ -108,7 +122,7 @@ export class EpreuvesService {
     return of(null);
   }
 
-  deleteEpreuve(epreuve_id: number): Observable<boolean> {
+  deleteEpreuveFake(epreuve_id: number): Observable<boolean> {
     const index = this.fakeEpreuves.findIndex(e => e.epreuve_id === epreuve_id);
     if (index !== -1) {
       this.fakeEpreuves.splice(index, 1);
