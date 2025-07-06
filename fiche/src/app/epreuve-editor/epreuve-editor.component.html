@@ -1,0 +1,22 @@
+<div class="containerE">
+    <div class="formContainerFor">
+        <div class="formContainer">
+            <h1 class="title">Ajout d'une épreuve</h1>
+            <form class="formulaire" (ngSubmit)="addEpreuve()">
+                <label class="labelid" for="epreuve_name">Nom</label><br>
+                <input type="text" required name="epreuve_name" [(ngModel)]="epreuve_name"><br>
+                <label class="labelpw" for="epreuve_description">Description</label><br>
+                <input type="text" required name="epreuve_description" [(ngModel)]="epreuve_description"><br>
+                <label class="labelpw" for="epreuve_materiels">Matériels</label><br>
+                <input class="lastInput" type="text" required name="epreuve_materiels" [(ngModel)]="epreuve_materiels"><br>
+                <select id="juge" required name="juge" [(ngModel)]="juge_id">
+                    <option [ngValue]="null" disabled selected>-- Sélectionner un juge --</option>
+                    <option *ngFor="let j of AllJuges" [value]="juge_id">{{j.juge_id}}. {{j.firstname}} {{j.surename}}</option>
+                </select><br>
+                <div class="btn">
+                    <button type="submit" class="submit">Enregistrer</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

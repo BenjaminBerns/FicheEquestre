@@ -34,6 +34,10 @@ export class EpreuvesComponent implements OnInit {
     this.router.navigate(['/pop-up/epreuve', epreuve_id, 'juge', juge_id]);
   }
 
+  RedirectAdd() {
+    this.router.navigate(['/addEpreuve', this.competitionId]);
+  }
+
   loadEpreuves(): void {
     this.service.getAllEpreuvesbyCompetitionId(this.competitionId).subscribe(res => {
       this.epreuves = res.data;
