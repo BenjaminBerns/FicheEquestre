@@ -19,6 +19,7 @@ import { NotationsComponent } from './notations/notations.component';
 import { AuthGuard } from './guards/auth.guard';
 import { authAdminGuard } from './guards/auth-admin.guard';
 import { CompetitionEditorComponent } from './competition-editor/competition-editor.component';
+import { EpreuveEditorComponent } from './epreuve-editor/epreuve-editor.component';
 
 export const routes: Routes = [
   //----------------------Accueil + Connexion--------------------//
@@ -45,7 +46,7 @@ export const routes: Routes = [
   //----------------------Epreuves--------------------//
   { path: 'detail-epreuves/:id', component: DetailEpreuveComponent, canActivate: [AuthGuard]  },
   { path: 'competitions/:id/epreuves', component: EpreuvesComponent, canActivate: [AuthGuard]  },
-  
+  { path: 'addEpreuve/:id', component: EpreuveEditorComponent, canActivate: [AuthGuard] },
   //----------------------Compétitions--------------------//
   { path: 'listecompetitions', component: ListComponent, canActivate: [AuthGuard] },
   { path: 'competitions/:id/epreuves', component: EpreuvesComponent, canActivate: [AuthGuard] },

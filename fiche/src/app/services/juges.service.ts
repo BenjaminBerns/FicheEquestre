@@ -2,6 +2,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
+import { environment } from '../../environnements/environnements';
 
 export interface CompetitionJuge {
   juge_id: number;
@@ -29,6 +30,12 @@ export class JugesService {
 
   
   constructor(private http: HttpClient) {}
+
+  // Récupère la liste de tous les juges depuis l'API
+  getAllJuges(): Observable<any> {
+    const url = `${environment.apiUrl}/juge/getAllJuges`;
+    return this.http.get(url);
+  }
 
   /*private apiUrl = 'http://localhost:3000/api/juges';
 
@@ -118,21 +125,21 @@ export class JugesService {
 
   getJugesByCompetition(id: number): Observable<any> {
     console.log('ID Compétition : ', id);
-    const url = 'http://prod-project-32/api/competition/getJugesByCompetition';
+    const url = `${environment.apiUrl}/competition/getJugesByCompetition`;
     const params = { id: id };
     return this.http.get(url, { params });
   }
 
   getJugesById(id: number): Observable<any> {
     console.log('ID JUGE : ', id);
-    const url = 'http://prod-project-32/api/juge/getSpecificJuge';
+    const url = `${environment.apiUrl}/juge/getSpecificJuge`;
     const params = { id: id };
     return this.http.get(url, { params });
   }
 
   getCompetitionByJuge(jugeId: number): Observable<any> {
     console.log('JUGEID : ', jugeId);
-    const url = 'http://prod-project-32/api/juge/getCompetitionsByJuge';
+    const url = `${environment.apiUrl}/juge/getCompetitionsByJuge`;
     const params = { jugeId: jugeId };
     return this.http.get(url, { params });
   }
@@ -152,7 +159,7 @@ UpdateJuge(id: number, updatedData: Juge): Observable<any> {
       response: updatedData.response,
       competition_juge: updatedData.competition_juge
     };
-    const url = 'http://prod-project-32/api/juge/updateJuge';
+    const url = `${environment.apiUrl}/juge/updateJuge`;
     return this.http.put(url, body);
   }
 
