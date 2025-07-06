@@ -23,11 +23,11 @@
         </form>
     </div>
 
-    <div class="containerE" *ngIf="isUpdating === true">
+        <div class="containerE" *ngIf="isUpdating === true">
         <div class="formContainerFor" *ngFor="let epreuve of epreuves; let i = index">
             <div class="formContainer3">
                 <h1 class="title">Détails de l'épreuve</h1>
-                <form class="formulaire" (ngSubmit)="updateCompetition()">
+                <div class="formulaire">
                     <label class="labelid" for="epreuve_name_{{epreuve.epreuve_id}}">Nom</label><br>
                     <input id="epreuve_name_{{epreuve.epreuve_id}}" type="text" required
                         name="epreuve_name_{{epreuve.epreuve_id}}" [(ngModel)]="epreuve.epreuve_name"><br>
@@ -37,13 +37,23 @@
                     <label class="labelpw" for="epreuve_materiels_{{epreuve.epreuve_id}}">Matériels</label><br>
                     <input id="epreuve_materiels_{{epreuve.epreuve_id}}" class="lastInput" type="text" required
                         name="epreuve_materiels_{{epreuve.epreuve_id}}" [(ngModel)]="epreuve.epreuve_materiels"><br>
-                    <div class="btn">
-                        <!-- <button type="button" class="delete" (click)="deleteEpreuve(epreuve.epreuve_id)">Supprimer cette
-                            épreuve</button> -->
+                    <label class="labelpw" for="juge_{{epreuve.epreuve_id}}">Juge</label><br>
+                    <select id="juge_{{epreuve.epreuve_id}}" required name="juge_{{epreuve.epreuve_id}}" [(ngModel)]="epreuve.juge_id">
+                        <option [ngValue]="null" disabled selected>-- Sélectionner un juge --</option>
+                        <option *ngFor="let j of AllJuges" [value]="j.juge_id">{{j.juge_id}}. {{j.firstname}} {{j.surename}}</option>
+                    </select><br>
+                    <!--  <div class="btn">
+                                                                                                       <button type="button" class="delete" (click)="deleteEpreuve(epreuve.epreuve_id)">Supprimer cette
+                                                                                                            épreuve</button> 
+                                                                                                    </div>-->
                     </div>
-                </form>
             </div>
         </div>
+    </div>
+    
+    <!-- Bouton pour sauvegarder toutes les modifications -->
+    <div class="btn" *ngIf="isUpdating === true">
+        <button class="submit" type="button" (click)="updateCompetition()">Sauvegarder toutes les modifications</button>
     </div>
 
     <!-- Section pour ajouter une nouvelle compétition -->
@@ -62,7 +72,7 @@
             <label class="labelpw" for="new_competition_status">Statut</label><br>
             <select id="new_competition_status" required name="new_competition_statut"
                 [(ngModel)]="newCompetition.competition_statut">
-                <option [ngValue]="null">-- Sélectionner un statut --</option>
+                <option [ngValue]="null" disabled selected>-- Sélectionner un statut --</option>
                 <option [ngValue]="1">En attente</option>
                 <option [ngValue]="2">En cours</option>
                 <option [ngValue]="3">Terminée</option>
@@ -81,12 +91,12 @@
         </form>
     </div> -->
 
-    <div class="containerE" *ngIf="ListEpreuvesTemp.length > 0">
+        <div class="containerE" *ngIf="ListEpreuvesTemp.length > 0">
         <ng-container *ngFor="let epreuve of ListEpreuvesTemp; let i = index">
             <div class="formContainerFor">
                 <div class="formContainer3">
                     <h1 class="title">Détails de l'épreuve {{i + 1}}</h1>
-                    <form class="formulaire">
+                    <div class="formulaire">
                         <label class="labelid" for="epreuve_name_{{i}}">Nom</label><br>
                         <input type="text" required name="epreuve_name_{{i}}" [(ngModel)]="epreuve.epreuve_name"><br>
                         <label class="labelpw" for="epreuve_description_{{i}}">Description</label><br>
@@ -95,11 +105,16 @@
                         <label class="labelpw" for="epreuve_materiels_{{i}}">Matériels</label><br>
                         <input class="lastInput" type="text" required name="epreuve_materiels_{{i}}"
                             [(ngModel)]="epreuve.epreuve_materiels"><br>
-                        <div class="btn">
-                            <!-- <button type="button" class="delete" (click)="deleteEpreuve(epreuve.epreuve_id)">Supprimer cette
-                            épreuve</button> -->
+                        <label class="labelpw" for="juge_{{i}}">Juge</label><br>
+                        <select id="juge_{{i}}" required name="juge_{{i}}" [(ngModel)]="epreuve.juge_id">
+                            <option [ngValue]="null" disabled selected>-- Sélectionner un juge --</option>
+                            <option *ngFor="let j of AllJuges" [value]="j.juge_id">{{j.juge_id}}. {{j.firstname}} {{j.surename}}</option>
+                        </select><br>
+                        <!-- <div class="btn">
+                                                                                                    <button type="button" class="delete" (click)="deleteEpreuve(epreuve.epreuve_id)">Supprimer cette
+                                                                                                    épreuve</button>
+                                                                                                </div> -->
                         </div>
-                    </form>
                 </div>
             </div>
         </ng-container>
