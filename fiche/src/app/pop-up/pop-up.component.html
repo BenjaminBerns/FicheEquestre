@@ -1,5 +1,5 @@
 <div class="background">
-    <div class="container" *ngIf="isNb === false">
+    <div class="container" *ngIf="isNb === false && isIDc === false">
         <img src="danger.png" alt="">
             <h1>Redirection !</h1>
         <p *ngIf="isEpreuve" >Souhaitez vous séléctionner le détails des épreuves ou des juges affecter à cette épreuve ?</p>
@@ -8,16 +8,28 @@
             <button *ngIf="isEpreuve" [routerLink]="['/detail-epreuves', id]">Epreuves</button>
             <button *ngIf="!isEpreuve" [routerLink]="['/competitionEdit', id]">Compétitions</button>
             <button *ngIf="isEpreuve" [routerLink]="['/juges/epreuve', juge_id]">Juges</button>
-            <button *ngIf="!isEpreuve" [routerLink]="['/juges/competition', juge_id]">Juges</button>
+            <button *ngIf="!isEpreuve" [routerLink]="['/juges/competition', id]">Juges</button>
         </div>
     </div>
-    <div class="containerAdd" *ngIf="isNb === true">
+    <div class="containerAdd" *ngIf="isNb === true && isIDc === false" >
         <img src="danger.png" alt="">
         <h1>Redirection !</h1>
         <p>Avant de créer une compétition, merci de bien vouloir indiquez combien dépreuves vous souhaitez créer !</p>
             <input type="number"  [(ngModel)]="NbEp">
         <div class="btn-container">
             <button *ngIf="!isEpreuve" [routerLink]="['/competitionAdd', NbEp]">Confirmer</button>
+        </div>
+    </div>
+    <div class="containerAdd" *ngIf=" isNb === false && isIDc === true">
+        <img src="danger.png" alt="">
+        <h1>Redirection !</h1>
+        <p>Avant de créer une Epreuve, merci de bien vouloir indiquez la compétition à laquelle elle sera référé !<p>
+        <select required name="id_competition" [(ngModel)]="id_competition">
+            <option [ngValue]="null" disabled selected>-- Sélectionner une compétition --</option>
+            <option *ngFor="let j of competition" [value]="j.competition_id">{{j.competition_id}}. {{j.competition_nom}}</option>
+        </select>
+        <div class="btn-container">
+            <button *ngIf="!isEpreuve" [routerLink]="['/addEpreuve', id_competition]">Confirmer</button>
         </div>
     </div>
 </div>

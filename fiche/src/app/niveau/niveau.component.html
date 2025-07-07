@@ -1,0 +1,41 @@
+<div class="container">
+  <h1>Liste des Niveaux</h1>
+  <table class="table">
+    <thead>
+      <tr>
+        <th class="border-radius-left">Identifiant</th>
+        <th class="border-radius-right">Nom</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let niveau of tousLesNiveaux">
+        <td>{{ niveau.niveau_id }}</td>
+        <td>{{ niveau.niveau_nom }}</td>
+      </tr>
+    </tbody>
+  </table>
+  <button class="btnadd" (click)="AddNiveau()">Ajouter un Niveau</button>
+    <h1>Liste des Cavaliers</h1>
+    <table class="table">
+        <thead>
+            <tr>
+                <th class="border-radius-left">Identifiant</th>
+                <th>Nom</th>
+                <th class="border-radius-right">Dossard</th>
+
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let c of ListCavaliers">
+                <td>{{ c.cavalier_id }}</td>
+                <td>{{ c.cavalier_nom }}</td>
+                <td>{{ c.cavalier_dossard }}</td>
+            </tr>
+        </tbody>
+    </table>
+<button class="btnadd" (click)="AddCavalier()">Ajouter un Cavalier</button>
+  <ng-template #noNiveaux>
+    <p>Aucun niveau disponible.</p>
+  </ng-template>
+</div>
+

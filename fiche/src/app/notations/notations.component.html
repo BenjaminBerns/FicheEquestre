@@ -1,31 +1,35 @@
-<h2 *ngIf="epreuveId">Notations pour l'épreuve #{{ epreuveId }}</h2>
-<h2 *ngIf="!epreuveId">Toutes les notations</h2>
+<div class="container">
+  <h1 *ngIf="epreuveId">Notations pour l'épreuve #{{ epreuveId }}</h1>
+  <h1 *ngIf="!epreuveId">Toutes les notations</h1>
 
-<table>
-  <thead>
-    <tr>
-      <th>Notation ID</th>
-      <th>Contrat</th>
-      <th>Allure</th>
-      <th>Pénalité</th>
-      <th>Style</th>
-      <th>Total</th>
-      <th>Cavalier</th>
-      <th>Épreuve</th>
-      <th>Niveau</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let n of notations">
-      <td>{{ n.notation_id }}</td>
-      <td>{{ n.contrat_notation }}</td>
-      <td>{{ n.allure_notation }}</td>
-      <td>{{ n.penalite_notation }}</td>
-      <td>{{ n.style_notation }}</td>
-      <td>{{ n.total }}</td>
-      <td>{{ n.cavalier_id }}</td>
-      <td>{{ n.epreuve_id }}</td>
-      <td>{{ n.niveau_id }}</td>
-    </tr>
-  </tbody>
-</table>
+  <table class="table">
+    <thead>
+      <tr>
+        <th class="border-radius-left">Cavalier</th>
+        <th>Contrat</th>
+        <th>Allure</th>
+        <th>Pénalité</th>
+        <th>Style</th>
+        <th>Épreuve</th>
+        <th>Niveau</th>
+        <th class="border-radius-right" style="background-color: #B0C4DE; color: black; font-size: 20px;">Total</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let n of notations">
+        <td>{{ n.cavalier_id }}</td>
+        <td>{{ n.contrat_notation }}</td>
+        <td>{{ n.allure_notation }}</td>
+        <td>{{ n.penalite_notation }}</td>
+        <td>{{ n.style_notation }}</td>
+        <td>{{ n.epreuve_id }}</td>
+        <td>{{ n.niveau_id }}</td>
+        <td>{{ n.total }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<ng-template #noEpreuves>
+  <p>Aucune épreuve pour cette compétition.</p>
+</ng-template>

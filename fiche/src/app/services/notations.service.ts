@@ -17,6 +17,8 @@ export interface Notation {
   providedIn: 'root'
 })
 export class NotationsService {
+  notation: Notation[] = [];
+
   private notations: Notation[] = [
     {
       notation_id: 1,
@@ -55,6 +57,14 @@ export class NotationsService {
 
   getAllNotations(): Observable<Notation[]> {
     return of(this.notations);
+  }
+
+  // getAllNotations(): Notation[] {
+  //   return this.notation;
+  // }
+
+  setNotations(notations: Notation[]): void{
+    this.notation = notations;
   }
 
   getNotationsByEpreuveId(epreuveId: number): Observable<Notation[]> {

@@ -38,3 +38,41 @@
     </tr>
   </tbody>
 </table>
+
+<!-- <div class="container">
+  <h1>Cavalier concourrant pour l'épreuve n°{{ epreuve_id }}</h1>
+  <table class="table">
+    <thead>
+      <tr>
+        <th class="border-radius-left">Nom</th>
+        <th>Description</th>
+        <th>Matériels</th>
+        <th>Juge ID</th>
+        <th>Notation</th>
+        <th>Cavaliers</th>
+        <th>Détail</th>
+        <th class="border-radius-right">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let c of cavaliers">
+        <td>{{ c.epreuve_name }}</td>
+        <td>{{ c.epreuve_description }}</td>
+        <td>{{ c.epreuve_materiels }}</td>
+        <td>{{ c.juge_id }}</td>
+        <td>{{ c.notation_type }}</td>
+        <td>
+          <button (click)="Note(c.cavalier_id)" class="detail-link">Voir</button>
+        </td>
+        <td>
+          <img class="icon" src="delete.png">
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <button class="btnadd" (click)="AddCavalier()">Ajouter un cavalier</button>
+</div>
+
+<ng-template #noEpreuves>
+  <p>Aucune épreuve pour cette compétition.</p>
+</ng-template> -->

@@ -1,6 +1,6 @@
-<div class="container">
+<div class="container" *ngIf="status === 'competition'">
     <h1>Liste des Juges</h1>
-    <table *ngIf="juges">
+    <table class="table" *ngIf="jugesCompetiton">
         <thead>
             <tr>
                 <th class="border-radius-left">Prénom</th>
@@ -11,7 +11,37 @@
             </tr>
         </thead>
         <tbody>
-            <tr >
+            <tr *ngFor="let juges of jugesCompetiton, let i = index">
+                <td>{{ juges.firstname }}</td>
+                <td>{{ juges.surename }}</td>
+                <td>{{ juges.username }}</td>
+                <td>
+                    <a class="detail-link" [routerLink]="['/juges/detail-juge', juges.juge_id]">Consulter</a>
+                    <!-- <a class="detail-link" [routerLink]="['/juges', juge.id, 'modifier']">Modifier</a> -->
+                </td>
+                <td>
+                    <img [routerLink]="['/qr-code/competition', competiton_id, 'juge', juges.juge_id]" class="icon"
+                        src="qr.png" alt="">
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<div class="container" *ngIf="status === 'detail' || 'epreuve'">
+    <h1>Liste des Juges</h1>
+    <table class="table" *ngIf="juges">
+        <thead>
+            <tr>
+                <th class="border-radius-left">Prénom</th>
+                <th>Nom</th>
+                <th>Nom d'utilisateur</th>
+                <th>Modifier</th>
+                <th class="border-radius-right">Affichage QR-code</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
                 <td>{{ juges.firstname }}</td>
                 <td>{{ juges.surename }}</td>
                 <td>{{ juges.username }}</td>
@@ -20,7 +50,8 @@
                     <!-- <a class="detail-link" [routerLink]="['/juges', juge.id, 'modifier']">Modifier</a> -->
                 </td>
                 <td>
-                    <img [routerLink]="['/qr-code/competition', competiton_id, 'juge', juge_id]" class="icon" src="qr.png" alt="">
+                    <img [routerLink]="['/qr-code/competition', competiton_id, 'juge', juge_id]" class="icon"
+                        src="qr.png" alt="">
                 </td>
             </tr>
         </tbody>

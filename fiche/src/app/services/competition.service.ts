@@ -3,6 +3,7 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { of } from 'rxjs'; //que pour les fake données
 import cryptoRandomString from 'crypto-random-string';
+import { environment } from '../../environnements/environnements';
 
 export interface Competition {
   competition_id: number;
@@ -135,12 +136,12 @@ export class CompetitionService {
   }
 
   CreateCompetition(data: Partial<Competition>): Observable<any> {
-    const url = 'http://prod-project-32/api/competition/createCompetition';
+    const url = `${environment.apiUrl}/competition/createCompetition`;
     return this.http.post(url, data);
   }
 
   getAllCompetitions(): Observable<any> {
-    const url = 'http://prod-project-32/api/competition/getAllCompetitions';
+    const url = `${environment.apiUrl}/competition/getAllCompetitions`;
     return this.http.get(url);
   }
 
@@ -171,13 +172,13 @@ export class CompetitionService {
   // }
 
   getCompetitionByToken(id: number): Observable<any> {
-    const url = 'http://prod-project-32/api/qrcode/getCompetitionDataFromToken';
+    const url = `${environment.apiUrl}/qrcode/getCompetitionDataFromToken`;
     const params = { id: id };
     return this.http.get(url, { params });
   }
 
   getCompetitionById(id: number): Observable<any> {
-    const url = 'http://prod-project-32/api/competition/getSpecificCompetition';
+    const url = `${environment.apiUrl}/competition/getSpecificCompetition`;
     const params = { id: id };
     return this.http.get(url, { params });
   }
@@ -192,7 +193,7 @@ export class CompetitionService {
       competition_location: updatedData.competition_location,
       competition_statut: updatedData.competition_statut
     };
-    const url = 'http://prod-project-32/api/competition/updateCompetition';
+    const url = `${environment.apiUrl}/competition/updateCompetition`;
     return this.http.put(url, body);
   }
 
