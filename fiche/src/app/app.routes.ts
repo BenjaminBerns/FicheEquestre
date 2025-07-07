@@ -20,6 +20,7 @@ import { AuthGuard } from './guards/auth.guard';
 import { authAdminGuard } from './guards/auth-admin.guard';
 import { CompetitionEditorComponent } from './competition-editor/competition-editor.component';
 import { EpreuveEditorComponent } from './epreuve-editor/epreuve-editor.component';
+import { NiveauComponent } from './niveau/niveau.component';
 
 export const routes: Routes = [
   //----------------------Accueil + Connexion--------------------//
@@ -31,6 +32,7 @@ export const routes: Routes = [
   { path: 'pop-up/competition/:id', component: PopUpComponent, canActivate: [AuthGuard]},
   { path: 'pop-up/epreuve/:id/juge/:juge_id', component: PopUpComponent, canActivate: [AuthGuard] },
   { path: 'pop-up/SetNombresEpreuves', component: PopUpComponent, canActivate: [AuthGuard] },
+  { path: 'pop-up/SetCompetitionID', component: PopUpComponent, canActivate: [AuthGuard] },
   
   //----------------------QrCode--------------------//
   { path: 'qr-code/competition/:id_competition/juge/:id_juge', component: QRComponent, canActivate: [AuthGuard] },
@@ -47,6 +49,7 @@ export const routes: Routes = [
   { path: 'detail-epreuves/:id', component: DetailEpreuveComponent, canActivate: [AuthGuard]  },
   { path: 'competitions/:id/epreuves', component: EpreuvesComponent, canActivate: [AuthGuard]  },
   { path: 'addEpreuve/:id', component: EpreuveEditorComponent, canActivate: [AuthGuard] },
+
   //----------------------Compétitions--------------------//
   { path: 'listecompetitions', component: ListComponent, canActivate: [AuthGuard] },
   { path: 'competitions/:id/epreuves', component: EpreuvesComponent, canActivate: [AuthGuard] },
@@ -64,8 +67,15 @@ export const routes: Routes = [
   { path: 'competitionAdd/:nb', component: CompetitionEditorComponent, canActivate: [AuthGuard] },
 
   //----------------------Notations--------------------//
-  { path: 'notations', component: NotationsComponent, canActivate: [AuthGuard]  },
-  { path: 'notations/epreuve/:id', component: NotationsComponent, canActivate: [AuthGuard]  }, 
+  { path: 'notations', component: NotationsComponent, canActivate: [authAdminGuard] },
+  { path: 'notations/epreuve/:id', component: NotationsComponent, canActivate: [AuthGuard] }, 
+  
+  //----------------------Cavaliers--------------------//
+  { path: 'niveau/:id/cavaliers', component: CavaliersComponent, canActivate: [AuthGuard] }, 
 
+  //----------------------Niveau--------------------//
+  { path: 'niveau/:id', component: NiveauComponent, canActivate: [AuthGuard] },
+
+  //----------------------Portail Download--------------------//
   { path: 'app-download', component: PortailAppComponent },
 ];

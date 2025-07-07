@@ -24,6 +24,7 @@
         <th>Matériels</th>
         <th>Juge ID</th>
         <th>Notation</th>
+        <th>Niveaux</th>
         <th>Détail</th>
         <th class="border-radius-right">Actions</th>
       </tr>
@@ -35,6 +36,9 @@
         <td>{{ ep.epreuve_materiels }}</td>
         <td>{{ ep.juge_id }}</td>
         <td>{{ ep.notation_type }}</td>
+        <td>
+          <button (click)="ListNiveaux()" class="cavaliers">Consulter</button>
+        </td>
         <td>
           <button (click)="DetailsPopUp(ep.epreuve_id, ep.juge_id)" class="detail-link">Voir</button>
           <!-- <button class="detail-link" (click)="getEpreuveDetails(ep.epreuve_id)">Voir</button> -->

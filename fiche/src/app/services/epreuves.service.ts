@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
+import { environment } from '../../environnements/environnements';
 
 export interface Epreuve {
   epreuve_id: number;
@@ -55,14 +56,14 @@ export class EpreuvesService {
   constructor(private http: HttpClient) { }
 
   getAllEpreuvesbyCompetitionId(id: number): Observable<any> {
-    const url = 'http://prod-project-32/api/epreuve/getAllEpreuvesOfCompetition';
+    const url = `${environment.apiUrl}/epreuve/getAllEpreuvesOfCompetition`;
     const params = { id: id };
     console.log('id compétition : ', id);
     return this.http.get(url, { params });
   }
 
   getEpreuvesById(id: number): Observable<any> {
-    const url = 'http://prod-project-32/api/epreuve/getSpecificEpreuve';
+    const url = `${environment.apiUrl}/epreuve/getSpecificEpreuve`;
     const params = { id: id };
     console.log(id);
     return this.http.get(url, { params });
@@ -81,7 +82,7 @@ export class EpreuvesService {
       juge_id: updatedData.juge_id,
       notation_type: updatedData.notation_type
     };
-    const url = 'http://prod-project-32/api/epreuve/updateEpreuve';
+    const url = `${environment.apiUrl}/epreuve/updateEpreuve`;
     return this.http.put(url, body);
   }
 
@@ -93,7 +94,7 @@ export class EpreuvesService {
 
   // Méthode pour supprimer une épreuve via l'API
   deleteEpreuve(epreuveId: number): Observable<any> {
-    const url = 'http://prod-project-32/api/epreuve/deleteEpreuve';
+    const url = `${environment.apiUrl}/epreuve/deleteEpreuve`;
     const params = { id: epreuveId };
     return this.http.delete(url, { params });
   }

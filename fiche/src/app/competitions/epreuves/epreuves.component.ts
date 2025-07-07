@@ -3,6 +3,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { EpreuvesService, Epreuve } from '../../services/epreuves.service';
 import { NgFor, NgIf } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { NotationsService } from '../../services/notations.service';
+import { Niveau, NiveauService } from '../../services/niveau.service';
 
 @Component({
   selector: 'app-epreuves',
@@ -22,7 +24,8 @@ export class EpreuvesComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private service: EpreuvesService,
-    private router: Router
+    private router: Router,
+    private niveau: NiveauService,
   ) {}
 
   ngOnInit(): void {
@@ -34,6 +37,10 @@ export class EpreuvesComponent implements OnInit {
     this.router.navigate(['/pop-up/epreuve', epreuve_id, 'juge', juge_id]);
   }
 
+  ListNiveaux() {
+    this.router.navigate(['/niveau', this.competitionId]);
+  }
+
   RedirectAdd() {
     this.router.navigate(['/addEpreuve', this.competitionId]);
   }
@@ -41,7 +48,16 @@ export class EpreuvesComponent implements OnInit {
   loadEpreuves(): void {
     this.service.getAllEpreuvesbyCompetitionId(this.competitionId).subscribe(res => {
       this.epreuves = res.data;
-      console.log('EPREUVES REAL : ',this.epreuves);
+      console.log('EPREUVES REAL : ', this.epreuves, 'NIVEAU', res.data[0].niveau_epreuves);
+
+      // Récupérer la liste de tous les niveaux présents dans toutes les épreuves
+      const tousLesNiveaux: any[] = [];
+
+      for (let i = 0; i < res.data[0].niveau_epreuves.length; i++) {
+        tousLesNiveaux.push(res.data[0].niveau_epreuves[i].niveau);
+        this.niveau.setNiveau(tousLesNiveaux);
+      }
+      console.log('Liste de tous les niveaux :', tousLesNiveaux);
     });
   }
 

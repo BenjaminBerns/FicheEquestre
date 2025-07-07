@@ -1,5 +1,7 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
+import { environment } from '../../environnements/environnements';
 
 export interface Cavalier {
   cavalier_id: number;
@@ -36,8 +38,15 @@ export class CavaliersService {
     }
   ];
 
-  getAllCavaliers(): Observable<Cavalier[]> {
-    return of(this.cavaliers);
+  constructor(private http: HttpClient) { }
+
+  // getAllCavaliers(): Observable<Cavalier[]> {
+  //   return of(this.cavaliers);
+  // }
+
+  getAllCavaliers(): Observable<any> {
+    const url = `${environment.apiUrl}/cavalier/getAllCavaliers`;
+    return this.http.get(url);
   }
 
   getCavalierById(id: number): Observable<Cavalier | null> {
