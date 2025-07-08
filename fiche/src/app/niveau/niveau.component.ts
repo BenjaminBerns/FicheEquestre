@@ -54,14 +54,13 @@ export class NiveauComponent {
       }
       console.log('Liste de tous les niveaux :', this.tousLesNiveaux);
     });
-  }
-
-  AddNiveau(): void{
-
-  }
+  } 
 
   AddCavalier(): void{
     
   }
 
+  UpdateCavalier(id: number): void{
+    this.router.navigate(['/competitions', id, 'epreuves']);
+  }
 }

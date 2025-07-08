@@ -139,7 +139,7 @@ export class CompetitionEditorComponent {
       }
     });
   //-------------------Compétitions----------------//
-    if (this.router.url.includes('epreuve') && this.router.url.includes('epreuve')) {
+    if (this.router.url.includes('epreuve')) {
       this.CompetitionStape = true;
     }
     this.nbEpreuves = Number(this.route.snapshot.paramMap.get('nb'));
@@ -150,8 +150,8 @@ export class CompetitionEditorComponent {
       this.initializeEpreuvesTemp();
     }
     
+    if(this.router.url.includes('competitionEdit')){this.isUpdating = true}
     if (this.idc !== 0) {
-      this.isUpdating = true;
       this.loadEpreuves();
       this.CompetitionService.getCompetitionById(this.idc).subscribe({
         next: (data) => {
@@ -192,7 +192,7 @@ export class CompetitionEditorComponent {
       console.error("L'identifiant de la compétition est invalide ou manquant.");
     }
     
-
+    console.log(this.isUpdating, ' | ', this.CompetitionStape);
   }
 
   addNewJuge(): void {
@@ -419,7 +419,7 @@ export class CompetitionEditorComponent {
             });
         }
         await new Promise(resolve => setTimeout(resolve, 1000)); // pause de 1 seconde pour laisser le temps d'effectuer les requêtes avant de récupérer la liste des compétitions
-        this.router.navigate(['/competitions', this.competition_id, 'epreuves']);  
+        this.router.navigate(['/listecompetitions']);  
   }
   
   // Méthode pour sauvegarder toutes les nouvelles epreuves

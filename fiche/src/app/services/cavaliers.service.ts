@@ -37,9 +37,12 @@ export class CavaliersService {
     return this.http.get(url);
   }
 
-  getCavalierById(id: number): Observable<Cavalier | null> {
-    const cav = this.cavaliers.find(c => c.cavalier_id === id);
-    return of(cav || null);
+  getCavalierById(id: number): Observable<any> {
+    const url = `${environment.apiUrl}/cavalier/getSpecificCavalier`;
+    const params = {
+      id: id
+    }
+    return this.http.get(url, { params });
   }
 
   addCavalier(cavalier: Cavalier): Observable<Cavalier> {

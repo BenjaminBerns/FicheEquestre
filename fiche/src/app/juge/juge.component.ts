@@ -18,6 +18,10 @@ export class JugeComponent {
   competiton_id: number | null = null;
   status: string = '';
   isJugeExist: boolean = false;
+  
+  competition: boolean = false;
+  detail: boolean = false;
+  epreuve: boolean = false;
 
   
   // competition_juge
@@ -41,7 +45,7 @@ export class JugeComponent {
   
     // Récupérer Juges par identifiant avec gestion des succès et erreurs
     if (this.router.url.includes('epreuve')) {
-      this.status = 'epreuve';
+      this.epreuve = true;
       this.jugeService.getJugesById(this.id).subscribe({
         next: data => {
           this.juges = data.data;
@@ -55,7 +59,7 @@ export class JugeComponent {
         this.isJugeExist = true;
       }
     } else if (this.router.url.includes('competition')) {
-      this.status = 'competition';
+      this.competition = true;
       this.jugeService.getJugesByCompetition(this.id).subscribe({
         next: data => {
           this.jugesCompetiton = data.data;
@@ -68,8 +72,8 @@ export class JugeComponent {
       if (this.jugesCompetiton === null) {
         this.isJugeExist = true;
       }
-    } else {
-      this.status = 'detail';
+    } else if(this.router.url.includes('detail')){
+      this.detail = true;
       // Récupérer competition_id avec gestion des succès et erreurs
       this.jugeService.getCompetitionByJuge(Number(this.juge_id)).subscribe({
         next: data => {

@@ -52,7 +52,7 @@ export class EpreuvesComponent implements OnInit {
   }
 
   RedirectAdd() {
-    this.router.navigate(['/addEpreuve', this.competitionId]);
+    this.router.navigate(['/CreateEpreuve', this.competitionId]);
   }
 
   loadEpreuves(): void {

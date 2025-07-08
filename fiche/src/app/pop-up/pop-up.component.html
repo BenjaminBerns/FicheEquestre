@@ -21,7 +21,7 @@
             <p class="label">Juges</p>
         </div>
         <div class="nbcontainer">  
-            <input min="1" max="10" type="number"  [(ngModel)]="NbEp">
+            <input min="1" max="1" type="number"  [(ngModel)]="NbEp">
             <input min="1" max="{{nbj}}" type="number" [(ngModel)]="NbJuge">
         </div>
         <div class="btn-container">
@@ -35,10 +35,10 @@
         <p>Avant de créer une Epreuve, merci de bien vouloir indiquez la compétition à laquelle elle sera référé !<p>
         <select required name="id_competition" [(ngModel)]="id_competition">
             <option [ngValue]="null" disabled selected>-- Sélectionner une compétition --</option>
-            <option *ngFor="let j of competition" [value]="j.competition_id">{{j.competition_id}}. {{j.competition_nom}}</option>
+            <option *ngFor="let j of competition" [ngValue]="j.competition_id">{{j.competition_id}}. {{j.competition_nom}}</option>
         </select>
         <div class="btn-container">
-            <button *ngIf="!isEpreuve" [routerLink]="['/addEpreuve', id_competition]">Confirmer</button>
+            <button *ngIf="!isEpreuve" [routerLink]="['/CreateEpreuve', id_competition]">Confirmer</button>
         </div>
     </div>
 

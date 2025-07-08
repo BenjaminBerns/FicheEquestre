@@ -1,5 +1,5 @@
 <div class="container">
-    <div class="formContainer2" *ngIf="isUpdating === true && CompetitionStape === true">
+    <div class="formContainer2" *ngIf="isUpdating === true && CompetitionStape === false">
         <h1 class="title">Détails de la compétition</h1>
         <form class="formulaire" (ngSubmit)="updateCompetition()">
             <label class="labelid" for="id">Nom</label><br>
@@ -53,7 +53,8 @@
     </div> -->
 
     <!-- Section pour ajouter une nouvelle compétition -->
-    <div class="formContainer2" *ngIf="isUpdating === false && CompetitionStape === true">
+    <ng-container *ngIf="CompetitionStape === true && isUpdating === false">
+    <div class="formContainer2">
         <h1 class="title">Ajouter une compétition</h1>
         <form class="formulaire" (ngSubmit)="addNewCompetition()">
             <label class="labelid" for="new_competition_name">Nom</label><br>
@@ -74,16 +75,16 @@
                 <option [ngValue]="3">Terminée</option>
             </select><br>
         </form>
-        </div>
+    </div>
         
-        <div class="formContainer2">
-            <h1 class="title">Ajouter un juge</h1>
+    <div class="formContainer2">
+        <h1 class="title">Ajouter un juge</h1>
             <form class="formulaire" (ngSubmit)="onClick()">
                 <label class="labelpw" for="new_competition_status">Liste des juges</label><br>
                 <ng-container *ngFor="let j of listeNbj">
                     <select id="juge" required name="juge" [(ngModel)]="juge_id">
                         <option [ngValue]="null" disabled selected>-- Sélectionner un juge --</option>
-                        <option *ngFor="let j of AllJuges" [value]="jid">{{j.juge_id}}. {{j.firstname}} {{j.surename}} </option>
+                        <option *ngFor="let j of AllJuges" [ngValue]="jid">{{j.juge_id}}. {{j.firstname}} {{j.surename}} </option>
                     </select><br>
                 </ng-container>
                 <div class="btn">
@@ -100,7 +101,7 @@
                 <input id="cavalier_dossard" type="text" required name="cavalier_dossard" [(ngModel)]="cavalier_dossard"><br>
             </form>
         </div>
-
+    </ng-container>
     <!-- <div class="nbEpreuves" *ngIf="isUpdating === false">
         <form>
             <label for="nbEpreuves" class="labelNb">Nombres d'épreuves</label>

@@ -52,7 +52,7 @@ export const routes: Routes = [
   //----------------------Epreuves--------------------//
   { path: 'detail-epreuves/:id', component: DetailEpreuveComponent, canActivate: [AuthGuard]  },
   { path: 'competitions/:id/epreuves', component: EpreuvesComponent, canActivate: [AuthGuard]  },
-  { path: 'addEpreuve/:id', component: EpreuveEditorComponent, canActivate: [AuthGuard] },
+  { path: 'CreateEpreuve/:id', component: EpreuveEditorComponent, canActivate: [AuthGuard] },
   { path: 'addEpreuve/:nbe/FromCompetition/:idc/with/:nbj/juges', component: EpreuveEditorComponent, canActivate: [AuthGuard] },  
 
   //----------------------Compétitions--------------------//
@@ -77,6 +77,7 @@ export const routes: Routes = [
   
   //----------------------Cavaliers--------------------//
   { path: 'niveau/:id/cavaliers', component: CavaliersComponent, canActivate: [AuthGuard] }, 
+  { path: 'AddCavaliers', component: CavaliersComponent, canActivate: [AuthGuard] }, 
 
   //----------------------Niveau--------------------//
   { path: 'niveau/:id', component: NiveauComponent, canActivate: [AuthGuard] },
