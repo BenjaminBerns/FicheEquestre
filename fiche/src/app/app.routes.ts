@@ -21,18 +21,21 @@ import { authAdminGuard } from './guards/auth-admin.guard';
 import { CompetitionEditorComponent } from './competition-editor/competition-editor.component';
 import { EpreuveEditorComponent } from './epreuve-editor/epreuve-editor.component';
 import { NiveauComponent } from './niveau/niveau.component';
+import { JugesEditorComponent } from './juges-editor/juges-editor.component';
 
 export const routes: Routes = [
   //----------------------Accueil + Connexion--------------------//
-  { path: '', component: HomeComponent},
-  { path: 'connexion', component: ConnexionComponent},
+  { path: '', component: HomeComponent },
+  { path: 'connexion', component: ConnexionComponent },
   { path: 'connexion', component: ConnexionComponent },
   
   //----------------------Pop-Up--------------------//
-  { path: 'pop-up/competition/:id', component: PopUpComponent, canActivate: [AuthGuard]},
+  { path: 'pop-up/competition/:id', component: PopUpComponent, canActivate: [AuthGuard] },
   { path: 'pop-up/epreuve/:id/juge/:juge_id', component: PopUpComponent, canActivate: [AuthGuard] },
   { path: 'pop-up/SetNombresEpreuves', component: PopUpComponent, canActivate: [AuthGuard] },
   { path: 'pop-up/SetCompetitionID', component: PopUpComponent, canActivate: [AuthGuard] },
+  { path: 'pop-up/SetJuges', component: PopUpComponent, canActivate: [AuthGuard] },
+  { path: 'pop-up/notation', component: PopUpComponent, canActivate: [AuthGuard] },
   
   //----------------------QrCode--------------------//
   { path: 'qr-code/competition/:id_competition/juge/:id_juge', component: QRComponent, canActivate: [AuthGuard] },
@@ -42,13 +45,15 @@ export const routes: Routes = [
   
   //----------------------Juges--------------------//
   { path: 'juges/competition/:id', component: JugeComponent, canActivate: [AuthGuard] },
-  { path: 'juges/epreuve/:id', component: JugeComponent, canActivate: [AuthGuard]  }, 
+  { path: 'juges/epreuve/:id', component: JugeComponent, canActivate: [AuthGuard] },
   { path: 'juges/detail-juge/:id', component: DetailJugeComponent, canActivate: [AuthGuard] },
+  { path: 'addJuges/:id', component: JugesEditorComponent, canActivate: [AuthGuard] },
 
   //----------------------Epreuves--------------------//
   { path: 'detail-epreuves/:id', component: DetailEpreuveComponent, canActivate: [AuthGuard]  },
   { path: 'competitions/:id/epreuves', component: EpreuvesComponent, canActivate: [AuthGuard]  },
   { path: 'addEpreuve/:id', component: EpreuveEditorComponent, canActivate: [AuthGuard] },
+  { path: 'addEpreuve/:nbe/FromCompetition/:idc/with/:nbj/juges', component: EpreuveEditorComponent, canActivate: [AuthGuard] },  
 
   //----------------------Compétitions--------------------//
   { path: 'listecompetitions', component: ListComponent, canActivate: [AuthGuard] },
@@ -64,7 +69,7 @@ export const routes: Routes = [
   { path: 'epreuves', component: EpreuvesComponent, canActivate: [AuthGuard]  },
   { path: 'cavaliers', component: CavaliersComponent, canActivate: [AuthGuard] },
   { path: 'competitionEdit/:idc', component: CompetitionEditorComponent, canActivate: [AuthGuard] },
-  { path: 'competitionAdd/:nb', component: CompetitionEditorComponent, canActivate: [AuthGuard] },
+  { path: 'competitionAdd/epreuve/:nbe/juge/:nbj', component: CompetitionEditorComponent, canActivate: [AuthGuard] },
 
   //----------------------Notations--------------------//
   { path: 'notations', component: NotationsComponent, canActivate: [authAdminGuard] },

@@ -32,7 +32,7 @@
           <button (click)="voirDetails(comp)" class="detail-link">Voir</button>
         </td>
         <td>
-          <img class="icon" src="delete.png" alt="" (click)="supprimerCompetition(comp.competition_id)">
+          <img (click)="DeleteCompetition(comp.competition_id)" class="icon" src="delete.png" alt="">
         </td>
       </tr>
     </tbody>

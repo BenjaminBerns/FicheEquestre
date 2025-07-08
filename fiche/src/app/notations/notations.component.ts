@@ -18,11 +18,21 @@ export class NotationsComponent implements OnInit {
   ngOnInit(): void {
     const id = this.route.snapshot.paramMap.get('id');
     this.epreuveId = id ? +id : null;
-
+    // Correction de l'erreur NG0900 : s'assurer que les données reçues sont bien un tableau
+    // L'API retourne probablement un objet contenant un champ "data" qui est le tableau attendu
     if (this.epreuveId) {
-      this.service.getNotationsByEpreuveId(this.epreuveId).subscribe(data => this.notations = data);
+      this.service.getNotationsByEpreuveId(this.epreuveId).subscribe(
+        (res: any) => {
+          // Si la réponse contient un champ "data", on l'utilise, sinon on prend la réponse telle quelle
+          this.notations = Array.isArray(res) ? res : (res.data ? res.data : []);
+        }
+      );
     } else {
-      this.service.getAllNotations().subscribe(data => this.notations = data);
+      this.service.getAllNotations().subscribe(
+        (res: any) => {
+          this.notations = Array.isArray(res) ? res : (res.data ? res.data : []);
+        }
+      );
     }
   }
 }

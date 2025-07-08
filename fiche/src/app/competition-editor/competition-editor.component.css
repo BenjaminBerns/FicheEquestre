@@ -1,12 +1,15 @@
 .container {
+    position: fixed;
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
-    align-items: flex-start;
+    justify-content: space-around;
+    align-items: center;
     width: 100%;
-    min-height: 80vh;
-    margin: auto;
-    gap: 40px;
+    left: 0;
+    top: 70px;
+    gap: 0;
+    margin: 0;
+    padding: 0;
     z-index: -1;
 }
 
@@ -22,6 +25,11 @@
         cursor: pointer;
         margin: 0px 0px 0 40px;
         width: 100%;
+}
+
+.cavalier_nom, .cavalier_dossard {
+    position: relative;
+    left: 20px;
 }
 
 .formulaire {
@@ -66,13 +74,12 @@
 
 .formContainer2 {
     background-color: #FFF2D5;
-    width: 35%;
-    min-width: 400px;
+    width: 65%;
     height: 80vh;
     border-radius: 25px;
-    margin: 100px;
+    margin: 30px;
     top: 10px;
-    position: fixed;
+    position: relative;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;

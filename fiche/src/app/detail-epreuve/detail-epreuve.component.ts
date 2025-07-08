@@ -4,6 +4,7 @@ import { EpreuvesService } from '../services/epreuves.service';
 import { FormsModule, NgModel } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { environment } from '../../environnements/environnements';
 
 @Component({
   selector: 'app-detail-epreuve',
@@ -79,11 +80,11 @@ export class DetailEpreuveComponent {
       console.log(data);
     });
     await new Promise(resolve => setTimeout(resolve, 1000));//pause de 1 seconde pour laisser le temps d'effectuer la requete avant de récupérer la liste des compétitions
-    this.router.navigate(['//competitions', this.competition_id, 'epreuves']);
+    this.router.navigate(['/competitions', this.competition_id, 'epreuves']);
   }
 
  getJugesByCompetition(id: number): Observable<any> {
-    const url = 'http://prod-project-32/api/competition/getJugesByCompetition';
+    const url = `${environment.apiUrl}/competition/getJugesByCompetition`;
     const params = { id: id };
     return this.http.get(url, { params });
   }

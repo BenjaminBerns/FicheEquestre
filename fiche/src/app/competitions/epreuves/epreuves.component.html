@@ -35,7 +35,7 @@
         <td>{{ ep.epreuve_description }}</td>
         <td>{{ ep.epreuve_materiels }}</td>
         <td>{{ ep.juge_id }}</td>
-        <td>{{ ep.notation_type }}</td>
+        <td><img (click)="Notation(ep.epreuve_id)" class="iconN" src="app.png" alt=""></td>
         <td>
           <button (click)="ListNiveaux()" class="cavaliers">Consulter</button>
         </td>
@@ -44,7 +44,7 @@
           <!-- <button class="detail-link" (click)="getEpreuveDetails(ep.epreuve_id)">Voir</button> -->
         </td>
         <td>
-          <img class="icon" src="delete.png">
+          <img (click)="DeleteEpreuve(ep.epreuve_id)" class="icon" src="delete.png">
           <!-- <button (click)="editEpreuve(ep)">✏️</button>
           <button (click)="deleteEpreuve(ep.epreuve_id)">🗑️</button> -->
         </td>

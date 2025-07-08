@@ -47,6 +47,37 @@ h1{
     gap: 0px;
 }
 
+.nbcontainer{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 90%;
+    gap: 20px;
+}
+
+.labelcontainer {
+    position: relative;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 90%;
+    height: 20px;
+    left: -75px;
+    gap: 20px;
+    /* background-color: red; */
+}
+
+.label {
+    top: 0px;
+    position: relative;
+    font-family: Lora, serif;
+    font-size: 14px;
+    font-style: italic;
+    margin: 0;
+    left: 20px;
+    color: rgba(0, 0, 0, 0.7);
+}
+
 .container img{
     width: 100px;
     height: 100px;

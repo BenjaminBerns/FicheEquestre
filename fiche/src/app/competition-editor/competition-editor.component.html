@@ -1,5 +1,5 @@
 <div class="container">
-    <div class="formContainer2" *ngIf="isUpdating === true">
+    <div class="formContainer2" *ngIf="isUpdating === true && CompetitionStape === true">
         <h1 class="title">Détails de la compétition</h1>
         <form class="formulaire" (ngSubmit)="updateCompetition()">
             <label class="labelid" for="id">Nom</label><br>
@@ -23,7 +23,7 @@
         </form>
     </div>
 
-        <div class="containerE" *ngIf="isUpdating === true">
+    <!-- <div class="containerE" *ngIf="isUpdating === true && CompetitionStape === false">
         <div class="formContainerFor" *ngFor="let epreuve of epreuves; let i = index">
             <div class="formContainer3">
                 <h1 class="title">Détails de l'épreuve</h1>
@@ -42,22 +42,18 @@
                         <option [ngValue]="null" disabled selected>-- Sélectionner un juge --</option>
                         <option *ngFor="let j of AllJuges" [value]="j.juge_id">{{j.juge_id}}. {{j.firstname}} {{j.surename}}</option>
                     </select><br>
-                    <!--  <div class="btn">
-                                                                                                       <button type="button" class="delete" (click)="deleteEpreuve(epreuve.epreuve_id)">Supprimer cette
-                                                                                                            épreuve</button> 
-                                                                                                    </div>-->
                     </div>
             </div>
         </div>
-    </div>
+    </div> -->
     
     <!-- Bouton pour sauvegarder toutes les modifications -->
-    <div class="btn" *ngIf="isUpdating === true">
+    <!-- <div class="btn" *ngIf="isUpdating === true && CompetitionStape === true">
         <button class="submit" type="button" (click)="updateCompetition()">Sauvegarder toutes les modifications</button>
-    </div>
+    </div> -->
 
     <!-- Section pour ajouter une nouvelle compétition -->
-    <div class="formContainer2" *ngIf="isUpdating === false">
+    <div class="formContainer2" *ngIf="isUpdating === false && CompetitionStape === true">
         <h1 class="title">Ajouter une compétition</h1>
         <form class="formulaire" (ngSubmit)="addNewCompetition()">
             <label class="labelid" for="new_competition_name">Nom</label><br>
@@ -77,11 +73,33 @@
                 <option [ngValue]="2">En cours</option>
                 <option [ngValue]="3">Terminée</option>
             </select><br>
-            <div class="btn">
-                <button class="add" type="submit">Ajouter</button>
-            </div>
         </form>
-    </div>
+        </div>
+        
+        <div class="formContainer2">
+            <h1 class="title">Ajouter un juge</h1>
+            <form class="formulaire" (ngSubmit)="onClick()">
+                <label class="labelpw" for="new_competition_status">Liste des juges</label><br>
+                <ng-container *ngFor="let j of listeNbj">
+                    <select id="juge" required name="juge" [(ngModel)]="juge_id">
+                        <option [ngValue]="null" disabled selected>-- Sélectionner un juge --</option>
+                        <option *ngFor="let j of AllJuges" [value]="jid">{{j.juge_id}}. {{j.firstname}} {{j.surename}} </option>
+                    </select><br>
+                </ng-container>
+                <div class="btn">
+                    <button class="add" type="submit">Enregistrer</button>
+                </div>
+            </form>
+        </div>
+        <div class="formContainer2">
+            <h1 class="title">Ajouter un cavalier</h1>
+            <form class="formulaire" (ngSubmit)="addNewCavalier()">
+                <label class="cavalier_nom" for="cavalier_nom">Nom</label>
+                <input id="cavalier_nom" type="text" required name="cavalier_nom" [(ngModel)]="cavalier_nom"><br>
+                <label class="cavalier_dossard" for="cavalier_dossard">Dossard</label>
+                <input id="cavalier_dossard" type="text" required name="cavalier_dossard" [(ngModel)]="cavalier_dossard"><br>
+            </form>
+        </div>
 
     <!-- <div class="nbEpreuves" *ngIf="isUpdating === false">
         <form>
@@ -91,7 +109,7 @@
         </form>
     </div> -->
 
-        <div class="containerE" *ngIf="ListEpreuvesTemp.length > 0">
+        <!-- <div class="containerE" *ngIf="ListEpreuvesTemp.length > 0 && CompetitionStape === false">
         <ng-container *ngFor="let epreuve of ListEpreuvesTemp; let i = index">
             <div class="formContainerFor">
                 <div class="formContainer3">
@@ -110,15 +128,11 @@
                             <option [ngValue]="null" disabled selected>-- Sélectionner un juge --</option>
                             <option *ngFor="let j of AllJuges" [value]="j.juge_id">{{j.juge_id}}. {{j.firstname}} {{j.surename}}</option>
                         </select><br>
-                        <!-- <div class="btn">
-                                                                                                    <button type="button" class="delete" (click)="deleteEpreuve(epreuve.epreuve_id)">Supprimer cette
-                                                                                                    épreuve</button>
-                                                                                                </div> -->
-                        </div>
+                    </div>
                 </div>
             </div>
         </ng-container>
-    </div>
+    </div> -->
 
 
 
@@ -138,3 +152,30 @@
         </form>
     </div> -->
 </div>
+<!-- <div class="container" *ngIf="NextStape === true">
+    <div class="containerE" *ngIf="ListEpreuvesTemp.length > 0 && CompetitionStape === false">
+        <ng-container *ngFor="let epreuve of ListEpreuvesTemp; let i = index">
+            <div class="formContainerFor">
+                <div class="formContainer3">
+                    <h1 class="title">Détails de l'épreuve {{i + 1}}</h1>
+                    <div class="formulaire">
+                        <label class="labelid" for="epreuve_name_{{i}}">Nom</label><br>
+                        <input type="text" required name="epreuve_name_{{i}}" [(ngModel)]="epreuve.epreuve_name"><br>
+                        <label class="labelpw" for="epreuve_description_{{i}}">Description</label><br>
+                        <input type="text" required name="epreuve_description_{{i}}"
+                            [(ngModel)]="epreuve.epreuve_description"><br>
+                        <label class="labelpw" for="epreuve_materiels_{{i}}">Matériels</label><br>
+                        <input class="lastInput" type="text" required name="epreuve_materiels_{{i}}"
+                            [(ngModel)]="epreuve.epreuve_materiels"><br>
+                        <label class="labelpw" for="juge_{{i}}">Juge</label><br>
+                        <select id="juge_{{i}}" required name="juge_{{i}}" [(ngModel)]="epreuve.juge_id">
+                            <option [ngValue]="null" disabled selected>-- Sélectionner un juge --</option>
+                            <option *ngFor="let j of AllJuges" [value]="j.juge_id">{{j.juge_id}}. {{j.firstname}}
+                                {{j.surename}}</option>
+                        </select><br>
+                    </div>
+                </div>
+            </div>
+        </ng-container>
+    </div>
+</div> -->

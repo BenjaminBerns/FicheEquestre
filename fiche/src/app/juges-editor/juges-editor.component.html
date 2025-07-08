@@ -1,0 +1,18 @@
+<div class="containerE">
+    <div class="formContainerFor">
+        <div class="formContainer">
+            <h1 class="title">Ajouter un juge</h1>
+            <form class="formulaire" (ngSubmit)="addJuges()">
+                <label class="labelid" for="firstname">firstname</label><br>
+                <input type="text" required name="firstname" [(ngModel)]="firstname"><br>
+                <label class="labelpw" for="surename">surename</label><br>
+                <input type="text" required name="surename" [(ngModel)]="surename"><br>
+                <label class="labelpw" for="username">username</label><br>
+                <input class="lastInput" type="text" required name="username"[(ngModel)]="username"><br>
+                <div class="btn">
+                    <button type="submit" class="submit">Enregistrer</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

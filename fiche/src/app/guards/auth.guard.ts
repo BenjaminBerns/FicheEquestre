@@ -26,15 +26,4 @@ export class AuthGuard implements CanActivate {
       return false;  // Refuser l'accès
     }
   }
-
-  canActivateAdmin(): boolean {
-    if (this.competitionService.getConnectionAdmin()) {
-      return true;  // Autoriser l'accès
-    } else {
-      // Rediriger vers la page de connexion si non connecté
-      this.router.navigate(['/connexion']);
-      return false;  // Refuser l'accès
-    }
-  }
-
 }

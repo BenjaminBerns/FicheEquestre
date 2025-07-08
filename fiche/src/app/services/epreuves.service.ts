@@ -86,9 +86,18 @@ export class EpreuvesService {
     return this.http.put(url, body);
   }
 
+  addNiveauToEpreuve(niveau_id: number, epreuve_id: number): Observable<any> {
+    const url = `${environment.apiUrl}/epreuve/AddNiveauToEpreuve`;
+    const params = {
+      niveau_id: niveau_id,
+      epreuve_id: epreuve_id
+     };
+    return this.http.post(url,params);
+  }
+
   // Nouvelle méthode pour créer une épreuve via l'API
   createEpreuve(epreuveData: Partial<Epreuve>): Observable<any> {
-    const url = 'http://prod-project-32/api/epreuve/createEpreuve';
+    const url = `${environment.apiUrl}/epreuve/createEpreuve`;
     return this.http.post(url, epreuveData);
   }
 

@@ -5,12 +5,8 @@ import { environment } from '../../environnements/environnements';
 
 export interface Cavalier {
   cavalier_id: number;
-  firstname: string;
-  lastname: string;
-  email: string;
-  phone: string;
-  birthdate: string;
-  licence_number: string;
+  cavalier_dossard: string;
+  cavalier_nom: string;
 }
 
 @Injectable({
@@ -20,21 +16,13 @@ export class CavaliersService {
   private cavaliers: Cavalier[] = [
     {
       cavalier_id: 1,
-      firstname: 'Claire',
-      lastname: 'Durand',
-      email: 'claire.durand@example.com',
-      phone: '0601020304',
-      birthdate: '2001-05-12',
-      licence_number: 'LIC123456'
+      cavalier_nom: 'Claire',
+      cavalier_dossard: 'Durand'
     },
     {
       cavalier_id: 2,
-      firstname: 'Lucas',
-      lastname: 'Martin',
-      email: 'lucas.martin@example.com',
-      phone: '0605060708',
-      birthdate: '1998-11-23',
-      licence_number: 'LIC654321'
+      cavalier_nom: 'Lucas',
+      cavalier_dossard: 'Martin',
     }
   ];
 

@@ -144,6 +144,18 @@ export class JugesService {
     return this.http.get(url, { params });
   }
 
+  addJugeToCompetition(juge: any): Observable<any> {
+    const url = `${environment.apiUrl}/juge/addJugeToCompetition`;
+    const params = { juge: juge };
+    return this.http.post(url, params);
+  }
+
+  AddJuges(juge: Partial<Juge>): Observable<any> {
+    const url = `${environment.apiUrl}/juge/createJuge`;
+    const params = { juge: juge };
+    return this.http.post(url, params);
+  }
+
 UpdateJuge(id: number, updatedData: Juge): Observable<any> {
     console.log("updatedData : -->", updatedData);
     // Ajout du paramètre id dans le corps envoyé à l'API

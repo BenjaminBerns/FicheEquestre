@@ -26,6 +26,7 @@
             </tr>
         </tbody>
     </table>
+    <button *ngIf="isJugeExist" class="btnadd" (click)="RedirectAdd()">Ajouter une épreuve</button>
 </div>
 
 <div class="container" *ngIf="status === 'detail' || 'epreuve'">
@@ -56,4 +57,5 @@
             </tr>
         </tbody>
     </table>
+    <button *ngIf="isJugeExist == false" class="btnadd" (click)="RedirectAdd()">Ajouter une épreuve</button>
 </div>

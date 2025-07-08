@@ -30,8 +30,11 @@ export class ListComponent implements OnInit {
     this.router.navigate(['/pop-up/competition', epreuve_id]);
   }
 
-  supprimerCompetition(id: number): void {
-    console.log('Suppression de la compétition avec ID :', id);
-    // plus tard : confirmation + appel à l'API si besoin pour les compétitions
+  async DeleteCompetition(competition_id: number) {
+    this.competitionService.deleteCompetition(competition_id).subscribe(data => {
+      console.log('DATA SUPPRIME COMPETITION', data);
+    });
+    await new Promise(resolve => setTimeout(resolve, 1000));
+    this.router.navigate(['/listecompetitions']);
   }
 }

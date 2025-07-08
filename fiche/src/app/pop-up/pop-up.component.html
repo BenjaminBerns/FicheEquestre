@@ -1,5 +1,5 @@
 <div class="background">
-    <div class="container" *ngIf="isNb === false && isIDc === false">
+    <div class="container" *ngIf="isNb === false && isIDc === false && isNotation === false">
         <img src="danger.png" alt="">
             <h1>Redirection !</h1>
         <p *ngIf="isEpreuve" >Souhaitez vous séléctionner le détails des épreuves ou des juges affecter à cette épreuve ?</p>
@@ -11,16 +11,25 @@
             <button *ngIf="!isEpreuve" [routerLink]="['/juges/competition', id]">Juges</button>
         </div>
     </div>
-    <div class="containerAdd" *ngIf="isNb === true && isIDc === false" >
+
+    <div class="containerAdd" *ngIf="isNb === true && isIDc === false && isNotation === false" >
         <img src="danger.png" alt="">
         <h1>Redirection !</h1>
-        <p>Avant de créer une compétition, merci de bien vouloir indiquez combien dépreuves vous souhaitez créer !</p>
-            <input type="number"  [(ngModel)]="NbEp">
+        <p>Avant de créer une compétition, merci de bien vouloir indiquez combien dépreuves & Juges vous souhaitez créer !</p>
+        <div class="labelcontainer">
+            <p class="label">Epreuves</p>
+            <p class="label">Juges</p>
+        </div>
+        <div class="nbcontainer">  
+            <input min="1" max="10" type="number"  [(ngModel)]="NbEp">
+            <input min="1" max="{{nbj}}" type="number" [(ngModel)]="NbJuge">
+        </div>
         <div class="btn-container">
-            <button *ngIf="!isEpreuve" [routerLink]="['/competitionAdd', NbEp]">Confirmer</button>
+            <button *ngIf="!isEpreuve" [routerLink]="['/competitionAdd/epreuve', NbEp, 'juge', NbJuge]">Confirmer</button>
         </div>
     </div>
-    <div class="containerAdd" *ngIf=" isNb === false && isIDc === true">
+
+    <div class="containerAdd" *ngIf=" isNb === false && isIDc === true && isNotation === false">
         <img src="danger.png" alt="">
         <h1>Redirection !</h1>
         <p>Avant de créer une Epreuve, merci de bien vouloir indiquez la compétition à laquelle elle sera référé !<p>
@@ -32,4 +41,32 @@
             <button *ngIf="!isEpreuve" [routerLink]="['/addEpreuve', id_competition]">Confirmer</button>
         </div>
     </div>
+
+    <div class="containerAdd" *ngIf=" isNb === false && isIDc === false && isNotation === true">
+        <img src="danger.png" alt="">
+        <h1>Redirection !</h1>
+        <p>Avant de consulter les notations, merci de bien vouloir indiquez l'épreuve à laquelle elle sera référé !<p>
+            <select required name="epreuve_id" [(ngModel)]="epreuve_id">
+                <option [ngValue]="null" disabled selected>-- Sélectionner une épreuve --</option>
+                <option *ngFor="let j of epreuves" [value]="j.epreuve_id">{{j.epreuve_id}}. {{j.epreuve_name}}
+                </option>
+            </select>
+        <div class="btn-container">
+            <button *ngIf="!isEpreuve" [routerLink]="['notations/epreuve', epreuve_id]">Confirmer</button>
+        </div>
+    </div>
+    <!-- <div class="containerAdd" *ngIf="SetJuges === true">
+        <img src="danger.png" alt="">
+        <h1>Redirection !</h1>
+        <p>Avant de créer un Juge, merci de bien vouloir renseigné l'épreuve à laquelle il sera référé !
+        <p>
+            <select required name="epreuve_id" [(ngModel)]="epreuve_id">
+                <option [ngValue]="null" disabled selected>-- Sélectionner une épreuve --</option>
+                <option *ngFor="let j of epreuves" [value]="j.epreuve_id">{{j.epreuve_id}}. {{j.epreuve_name}}
+                </option>
+            </select>
+        <div class="btn-container">
+            <button *ngIf="!isEpreuve" [routerLink]="['/addEpreuve', id_competition]">Confirmer</button>
+        </div>
+    </div> -->
 </div>

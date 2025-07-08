@@ -17,6 +17,7 @@ export class JugeComponent {
   juge_id: string | null = null;
   competiton_id: number | null = null;
   status: string = '';
+  isJugeExist: boolean = false;
 
   
   // competition_juge
@@ -50,6 +51,9 @@ export class JugeComponent {
           console.log('Erreur lors de la récupération du juge :', err);
         }
       });
+      if (this.juges === null) {
+        this.isJugeExist = true;
+      }
     } else if (this.router.url.includes('competition')) {
       this.status = 'competition';
       this.jugeService.getJugesByCompetition(this.id).subscribe({
@@ -61,6 +65,9 @@ export class JugeComponent {
           console.log('Erreur lors de la récupération des juges de la compétition :', err);
         }
       });
+      if (this.jugesCompetiton === null) {
+        this.isJugeExist = true;
+      }
     } else {
       this.status = 'detail';
       // Récupérer competition_id avec gestion des succès et erreurs
@@ -74,5 +81,10 @@ export class JugeComponent {
         }
       });
     }
+  }
+
+  RedirectAdd(): void{
+    // Redirige vers la route addJuges/:id
+    this.router.navigate(['addJuges', this.juge_id]);
   }
 }

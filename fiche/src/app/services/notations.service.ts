@@ -1,5 +1,11 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
+import { environment } from '../../environnements/environnements';
+import { NiveauService } from './niveau.service';
+import { ActivatedRoute, Router } from '@angular/router';
+import { EpreuvesService } from './epreuves.service';
+import { CavaliersService } from './cavaliers.service';
+import { HttpClient } from '@angular/common/http';
 
 export interface Notation {
   notation_id: number;
@@ -18,6 +24,14 @@ export interface Notation {
 })
 export class NotationsService {
   notation: Notation[] = [];
+  constructor(
+    private niveau: NiveauService,
+    private route: ActivatedRoute,
+    private service: EpreuvesService,
+    private router: Router,
+    private cavalier: CavaliersService,
+    private http: HttpClient
+  ) { }
 
   private notations: Notation[] = [
     {
@@ -67,7 +81,9 @@ export class NotationsService {
     this.notation = notations;
   }
 
-  getNotationsByEpreuveId(epreuveId: number): Observable<Notation[]> {
-    return of(this.notations.filter(n => n.epreuve_id === epreuveId));
+  getNotationsByEpreuveId(epreuveId: number): Observable<any> {
+    const url = `${environment.apiUrl}/notation/getNotationsOfEpreuve`;
+    const params = { epreuve_id: epreuveId };
+    return this.http.get(url, { params });
   }
 }

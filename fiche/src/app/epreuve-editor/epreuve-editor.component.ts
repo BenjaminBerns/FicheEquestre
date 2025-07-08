@@ -5,7 +5,7 @@ import { Juge, JugesService } from '../services/juges.service';
 import { Competition, CompetitionService, Epreuve } from '../services/competition.service';
 import { HttpClient } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
-import { NgFor } from '@angular/common';
+import { NgFor, NgIf } from '@angular/common';
 
 @Component({
   selector: 'app-epreuve-editor',
@@ -24,6 +24,11 @@ constructor(
     private http: HttpClient
   ) { }
 
+  nbe: number = 0;
+  idc: number = 0;
+  nbj: number = 0;
+  ide: number = 0;
+
   id_competition: number = 0;
   epreuve_id: number | null = null;
   epreuve_name: string = '';
@@ -31,9 +36,11 @@ constructor(
   epreuve_materiels: string = '';
   updatedDataE: any = null;
   notation_type: number | null = null;
-  juge_id: number | null = null;
+  juge_id: number = 0;
   epreuveData: any | null = null;
   AllJuges: Juge[] = [];
+
+  isAdding: boolean = false;
 
   newEpreuve: {
     epreuve_name: string;
@@ -46,9 +53,16 @@ constructor(
   };
 
   ngOnInit(): void {
+    //get params from URL
+    this.nbe = Number(this.route.snapshot.paramMap.get('nbe'));
+    this.idc = Number(this.route.snapshot.paramMap.get('idc'));
+    this.nbj = Number(this.route.snapshot.paramMap.get('nbj'));
+
+    if (this.router.url.includes('FromCompetition')) {
+      this.isAdding = true;
+    }
 
     this.getAllJuge();
-    this.id_competition = Number(this.route.snapshot.paramMap.get('id'));
 
   }
 
@@ -65,30 +79,53 @@ constructor(
     });
   }
 
+    
+
   async addEpreuve(): Promise<void> {
+    this.jugesServices.getJugesByCompetition(this.idc).subscribe({
+      next: data => {
+        this.juge_id = data.juge_id;
+        console.log(data);
+      
+        console.log('Ajout nouvelle Epreuve');
+        const epreuveToAdd = {
+          epreuve_name: this.epreuve_name,
+          epreuve_description: this.epreuve_description,
+          epreuve_materiels: this.epreuve_materiels,
+          competition_id: this.idc,
+          notation_type: 1,
+          juge_id: this.juge_id
+        };
+        console.log('epreuveToAdd -->', epreuveToAdd);
 
-    console.log('Ajout nouvelle Epreuve');
-    const epreuveToAdd = {
-      epreuve_name: this.epreuve_name,
-      epreuve_description: this.epreuve_description,
-      epreuve_materiels: this.epreuve_materiels,
-      competition_id: this.id_competition,
-      notation_type: 1,
-      juge_id: 1
-    };
-    console.log(epreuveToAdd);
+        this.EpreuveService.createEpreuve(epreuveToAdd).subscribe({
+          next: (response: any) => {
+            console.log('Nouvelle épreuve ajoutée:', response);
+            this.ide = response.data.epreuve_id;
+            console.log(this.ide, 'IDEpreuve');
+            this.addNE(this.ide);
+          },
+          error: (error: any) => {
+            console.error('Erreur lors de l\'ajout de l\'épreuve:', error);
+          }
+        });
+      }
+    })
 
-      this.EpreuveService.createEpreuve(epreuveToAdd).subscribe({
-        next: (response: any) => {
-          console.log('Nouvelle épreuve ajoutée:', response);
-        },
-        error: (error: any) => {
-          console.error('Erreur lors de l\'ajout de l\'épreuve:', error);
-        }
-      });
     
     await new Promise(resolve => setTimeout(resolve, 1000));
-    this.router.navigate(['/competitions', this.id_competition, 'epreuves']);
+    this.router.navigate(['/competitions', this.idc, 'epreuves']);
+  }
+
+  addNE(ide: number) {
+    this.EpreuveService.addNiveauToEpreuve(1, ide).subscribe({
+        next: (response: any) => {
+          console.log('Nouvelle Epreuve | Niveau :', response);
+        },
+        error: (error: any) => {
+          console.error('Erreur lors de l\'ajout Epreuve | Niveau :', error);
+        }
+      });
   }
 
 }

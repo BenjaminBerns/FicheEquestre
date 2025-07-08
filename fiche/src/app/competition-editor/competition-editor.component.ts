@@ -4,9 +4,10 @@ import { Competition, CompetitionService } from '../services/competition.service
 import { Epreuve, EpreuvesService } from '../services/epreuves.service';
 import { FormsModule, NgModel } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
-import { async, Observable } from 'rxjs';
+import { async, never, Observable } from 'rxjs';
 import { NgFor, NgIf } from '@angular/common';
 import { Juge, JugesService } from '../services/juges.service';
+import { Cavalier, CavaliersService } from '../services/cavaliers.service';
 @Component({
   selector: 'app-competition-editor',
   imports: [FormsModule, NgIf, NgFor],
@@ -20,6 +21,7 @@ export class CompetitionEditorComponent {
     private CompetitionService: CompetitionService,
     private EpreuveService: EpreuvesService,
     private jugesServices: JugesService,
+    private cavaliersServices: CavaliersService,
     private router: Router,
     private http: HttpClient
   ) { }
@@ -27,8 +29,12 @@ export class CompetitionEditorComponent {
   idc: number = 0;
 
   isUpdating: boolean = false;
+  CompetitionStape: boolean = false;
+  NextStape: boolean = false;
 
   nbEpreuves: number = 0;
+  nbj: number = 0;
+  nbe: number = 0;
 
   competition_nom: string = '';
   competition_date: string | null = null;
@@ -46,10 +52,22 @@ export class CompetitionEditorComponent {
   updatedDataE: any = null;
   notation_type: number | null = null;
   juge_id: number = 0;
+  jid: number = 0;
   epreuves: Epreuve[] = [];
   epreuveData: any | null = null;
+  cavalier_nom: string = '';
+  cavalier_dossard: string = '';
   
+  cavalier: Cavalier = {
+    cavalier_id: 0,
+    cavalier_nom: '',
+    cavalier_dossard: '',
+  };
+
   ListEpreuvesTemp: Epreuve[] = [];
+
+  listeNbj: number[] = []
+
   competition: Competition[] = [];
 
   AllJuges: Juge[] = [];
@@ -106,6 +124,13 @@ export class CompetitionEditorComponent {
   //------------------------------------------------------Initialisation---------------------------------------------------------//
 
   ngOnInit(): void {
+    this.idc = Number(this.route.snapshot.paramMap.get('idc'));
+    this.nbe = Number(this.route.snapshot.paramMap.get('nbe'));
+    this.nbj = Number(this.route.snapshot.paramMap.get('nbj'));
+    for (let i = 0; i < this.nbj; i++) {
+      this.listeNbj.push(i);
+    }
+    //addEpreuve/:nbe/FromCompetition/:idc/with/:nbj/juges
     this.getAllJuge();
   //-------------------ID-Compétitions----------------//
     this.CompetitionService.getAllCompetitions().subscribe({
@@ -114,7 +139,9 @@ export class CompetitionEditorComponent {
       }
     });
   //-------------------Compétitions----------------//
-    this.idc = Number(this.route.snapshot.paramMap.get('idc'));
+    if (this.router.url.includes('epreuve') && this.router.url.includes('epreuve')) {
+      this.CompetitionStape = true;
+    }
     this.nbEpreuves = Number(this.route.snapshot.paramMap.get('nb'));
     console.log('id compétition', this.idc, 'Nombres d\'épreuves souhaité :', this.nbEpreuves);
     
@@ -168,6 +195,32 @@ export class CompetitionEditorComponent {
 
   }
 
+  addNewJuge(): void {
+    const juge = this.jugesServices.getJugesById(this.jid);
+    this.jugesServices.addJugeToCompetition(juge);
+  }
+
+  getJugeByCompetition(): void{
+    this.AllJuges = []; //mise à zéro -> marge d'erreur dans le code
+    this.jugesServices.getJugesByCompetition(this.idc).subscribe({
+      next: (data) => {
+        this.AllJuges = data;
+        console.log('All juges récupérer : ', this.AllJuges);
+      },
+      error: (error) => {
+        console.error('Erreur lors de la récupération des juges :', error);
+        this.AllJuges = [];
+      }
+    });
+  }
+
+  addNewCavalier(): void {
+    this.cavalier.cavalier_nom = this.cavalier_nom;
+    this.cavalier.cavalier_dossard = this.cavalier_dossard;
+    console.log(this.cavalier);
+    this.cavaliersServices.addCavalier(this.cavalier);
+  }
+
     loadEpreuves(): void {
     this.EpreuveService.getAllEpreuvesbyCompetitionId(this.idc).subscribe({
       next: (res) => {
@@ -175,6 +228,8 @@ export class CompetitionEditorComponent {
         console.log('EPREUVES REAL : ',this.epreuves);
       }
     });
+      
+      
       
 
     //-------------------Epreuves----------------//
@@ -209,6 +264,12 @@ export class CompetitionEditorComponent {
   //   } else {
   //     console.error("L'identifiant de l'épreuve est invalide ou manquant.");
     //   }
+  }
+
+  onClick(): void{
+    this.addNewCompetition();
+    this.addNewJuge();
+    this.addNewCavalier();
   }
 
   // Ajouter une nouvelle épreuve
@@ -263,6 +324,8 @@ export class CompetitionEditorComponent {
       this.CompetitionService.CreateCompetition(this.newCompetition).subscribe({
         next: (response: any) => {
           console.log('Nouvelle compétition ajoutée :', response);
+          this.idc = response.competition_id;
+          console.log('Nouvelle compétition ID :', response.competition_id);
         },
         error: (error: any) => {
           console.error('Erreur lors de l\'ajout de la compétition :', error);
@@ -276,14 +339,14 @@ export class CompetitionEditorComponent {
     await new Promise(resolve => setTimeout(resolve, 1000));
     this.CompetitionService.getAllCompetitions().subscribe({
       next: (data) => {
-        console.log(data);
+        console.log('data getAllCompetition',data);
       }
     });
     // Pour chaque épreuve temporaire dans ListEpreuvesTemp, on l'ajoute via le service
     for (let epreuve of this.ListEpreuvesTemp) {
       this.addNewEpreuve(epreuve);
     }
-    this.router.navigate(['/listecompetitions']);
+    this.router.navigate(['/addEpreuve/', this.nbe,'FromCompetition', this.idc, 'with', this.nbj, 'juges']);
   }
 
   // Méthode pour supprimer une epreuve
@@ -356,8 +419,7 @@ export class CompetitionEditorComponent {
             });
         }
         await new Promise(resolve => setTimeout(resolve, 1000)); // pause de 1 seconde pour laisser le temps d'effectuer les requêtes avant de récupérer la liste des compétitions
-        this.router.navigate(['/competitions', this.competition_id, 'epreuves']);
-    
+        this.router.navigate(['/competitions', this.competition_id, 'epreuves']);  
   }
   
   // Méthode pour sauvegarder toutes les nouvelles epreuves

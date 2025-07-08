@@ -135,6 +135,12 @@ export class CompetitionService {
     
   }
 
+  deleteCompetition(competition_id: number): Observable<any> {
+    const url = `${environment.apiUrl}/competition/deleteCompetition`;
+    const params = { id: competition_id };
+    return this.http.delete(url, { params });
+  }
+
   CreateCompetition(data: Partial<Competition>): Observable<any> {
     const url = `${environment.apiUrl}/competition/createCompetition`;
     return this.http.post(url, data);
@@ -227,7 +233,7 @@ export class CompetitionService {
   }
   
   CreateQRcodeAPI(securite_key_id: string, juge_id: number, competition_id: number): Observable<any> {
-    const url = 'http://prod-project-32/api/securite/CreateSecurite';
+    const url = `${environment.apiUrl}/securite/CreateSecurite`;
     const body = {
       securite_key_id: securite_key_id,
       juge_id: juge_id,
@@ -238,7 +244,7 @@ export class CompetitionService {
   }
   
   QRcodeExist(token: string): Observable<any> {
-    const url = 'http://prod-project-32/api/qrcode/getCompetitionDataFromToken';
+    const url = `${environment.apiUrl}/qrcode/getCompetitionDataFromToken`;
     const params = { token: token };
     return this.http.get(url, { params });
   }

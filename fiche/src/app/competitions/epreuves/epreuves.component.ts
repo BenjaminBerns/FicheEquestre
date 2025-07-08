@@ -37,6 +37,16 @@ export class EpreuvesComponent implements OnInit {
     this.router.navigate(['/pop-up/epreuve', epreuve_id, 'juge', juge_id]);
   }
 
+  async DeleteEpreuve(epreuve_id: number) {
+    this.service.deleteEpreuve(epreuve_id);
+    await new Promise(resolve => setTimeout(resolve, 1000));
+    this.router.navigate(['/detail-epreuves/', this.competitionId]);
+  }
+
+  Notation(epreuve_id: number,) {
+    this.router.navigate(['notations/epreuve', epreuve_id]);
+  }
+
   ListNiveaux() {
     this.router.navigate(['/niveau', this.competitionId]);
   }

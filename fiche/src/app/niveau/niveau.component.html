@@ -4,13 +4,15 @@
     <thead>
       <tr>
         <th class="border-radius-left">Identifiant</th>
-        <th class="border-radius-right">Nom</th>
+        <th >Nom</th>
+        <th class="border-radius-right">Filtre</th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let niveau of tousLesNiveaux">
         <td>{{ niveau.niveau_id }}</td>
         <td>{{ niveau.niveau_nom }}</td>
+        <td><input type="radio" value="select"></td>
       </tr>
     </tbody>
   </table>

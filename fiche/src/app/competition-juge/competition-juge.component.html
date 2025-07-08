@@ -1,0 +1,15 @@
+<div class="container">
+    <div class="formContainer2">
+        <h1 class="title">Ajouter une compétition</h1>
+        <form class="formulaire" (ngSubmit)="addNew()">
+            <label class="labelpw" for="new_competition_status">Liste des juges</label><br>
+            <select id="juge" required name="juge" [(ngModel)]="juge_id">
+                <option [ngValue]="null" disabled selected>-- Sélectionner un juge --</option>
+                <option *ngFor="let j of AllJuges" [value]="j.juge_id">{{j.juge_id}}. {{j.firstname}} {{j.surename}}</option>
+            </select><br>
+            <div class="btn">
+                <button class="add" type="submit">Ajouter</button>
+            </div>
+        </form>
+    </div>
+</div>
